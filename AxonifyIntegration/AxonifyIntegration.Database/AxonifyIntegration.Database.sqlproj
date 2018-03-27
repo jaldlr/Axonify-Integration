@@ -64,9 +64,14 @@
   <ItemGroup>
     <Build Include="Tables\Temp1.sql" />
     <Build Include="Tables\Temp2.sql" />
+    <Build Include="API_IntroductoryCompletions.sql" />
+    <Build Include="API_IntroductoryCompletions_1.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="AxonifyIntegration.Database.publish.xml" />
     <None Include="AxonifyIntegration.Database.Local.publish.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="AxonifyIntegration.Database.refactorlog" />
   </ItemGroup>
 </Project>
