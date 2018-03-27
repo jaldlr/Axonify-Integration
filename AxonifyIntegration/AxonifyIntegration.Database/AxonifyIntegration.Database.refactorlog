@@ -14,4 +14,39 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="categoryExternalId" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="c79eeb50-9f58-40b1-89bf-69aadac3e634" ChangeDateTime="03/27/2018 22:46:53">
+    <Property Name="ElementName" Value="[dbo].[API_Category].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[API_Category]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="categoryExternalId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="7d7f1846-ab13-444e-9ad5-cf8defc0eb3e" ChangeDateTime="03/27/2018 22:51:18">
+    <Property Name="ElementName" Value="[dbo].[API_Subject].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[API_Subject]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="subjectExternalId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="c3a4bcf2-6df6-4587-b802-880426df9b25" ChangeDateTime="03/27/2018 22:52:40">
+    <Property Name="ElementName" Value="[dbo].[API_Category].[Revision]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[API_Category]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="revision" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="634d7dcb-336c-4965-8930-d3432c374441" ChangeDateTime="03/27/2018 22:53:12">
+    <Property Name="ElementName" Value="[dbo].[API_Topic].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[API_Topic]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="topicExternalId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="ffe5eb13-bd91-4103-988c-f76c22c1fc9c" ChangeDateTime="03/27/2018 22:55:04">
+    <Property Name="ElementName" Value="[dbo].[API_Course].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[API_Course]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="courseCode" />
+  </Operation>
 </Operations>
