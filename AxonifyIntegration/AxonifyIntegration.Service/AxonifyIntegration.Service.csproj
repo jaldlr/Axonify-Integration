@@ -42,6 +42,20 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AxonifyIntegration.Business\AxonifyIntegration.Business.csproj">
+      <Project>{9ae71586-33b1-4ece-8450-7df6c8c01085}</Project>
+      <Name>AxonifyIntegration.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AxonifyIntegration.Data\AxonifyIntegration.Data.csproj">
+      <Project>{2575ef01-127e-4c3e-be8c-733e7e55f945}</Project>
+      <Name>AxonifyIntegration.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AxonifyIntegration.Object\AxonifyIntegration.Object.csproj">
+      <Project>{9216c2bc-0053-4e4d-8f18-3c806f81c7b0}</Project>
+      <Name>AxonifyIntegration.Object</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

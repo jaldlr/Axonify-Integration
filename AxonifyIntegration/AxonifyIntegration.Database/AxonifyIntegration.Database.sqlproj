@@ -61,4 +61,11 @@
     <Folder Include="Procedures" />
     <Folder Include="Functions" />
   </ItemGroup>
+  <ItemGroup>
+    <Build Include="Tables\Temp1.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="AxonifyIntegration.Database.publish.xml" />
+    <None Include="AxonifyIntegration.Database.Local.publish.xml" />
+  </ItemGroup>
 </Project>
