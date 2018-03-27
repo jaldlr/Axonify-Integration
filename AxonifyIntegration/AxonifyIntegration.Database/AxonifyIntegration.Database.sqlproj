@@ -61,4 +61,7 @@
     <Folder Include="Procedures" />
     <Folder Include="Functions" />
   </ItemGroup>
+  <ItemGroup>
+    <Build Include="Tables\Table1.sql" />
+  </ItemGroup>
 </Project>
