@@ -5,6 +5,16 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "AxonifyIntegration.Database", "AxonifyIntegration.Database\AxonifyIntegration.Database.sqlproj", "{CFF277CD-E368-4A5B-AE07-A81A665D53A7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AxonifyIntegration.Data", "AxonifyIntegration.Data\AxonifyIntegration.Data.csproj", "{2575EF01-127E-4C3E-BE8C-733E7E55F945}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AxonifyIntegration.Object", "AxonifyIntegration.Object\AxonifyIntegration.Object.csproj", "{9216C2BC-0053-4E4D-8F18-3C806F81C7B0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AxonifyIntegration.Service", "AxonifyIntegration.Service\AxonifyIntegration.Service.csproj", "{DCCFE92F-C5FC-4E6D-8996-5186C4CA475E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AxonifyIntegration.WebApi", "AxonifyIntegration.WebApi\AxonifyIntegration.WebApi.csproj", "{86EDBFF8-D057-4D9E-8335-9CB6CC6DA86D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AxonifyIntegration.Business", "AxonifyIntegration.Business\AxonifyIntegration.Business.csproj", "{9AE71586-33B1-4ECE-8450-7DF6C8C01085}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,6 +27,26 @@ Global
 		{CFF277CD-E368-4A5B-AE07-A81A665D53A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CFF277CD-E368-4A5B-AE07-A81A665D53A7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CFF277CD-E368-4A5B-AE07-A81A665D53A7}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{2575EF01-127E-4C3E-BE8C-733E7E55F945}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2575EF01-127E-4C3E-BE8C-733E7E55F945}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2575EF01-127E-4C3E-BE8C-733E7E55F945}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2575EF01-127E-4C3E-BE8C-733E7E55F945}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9216C2BC-0053-4E4D-8F18-3C806F81C7B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9216C2BC-0053-4E4D-8F18-3C806F81C7B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9216C2BC-0053-4E4D-8F18-3C806F81C7B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9216C2BC-0053-4E4D-8F18-3C806F81C7B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCCFE92F-C5FC-4E6D-8996-5186C4CA475E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCCFE92F-C5FC-4E6D-8996-5186C4CA475E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCCFE92F-C5FC-4E6D-8996-5186C4CA475E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCCFE92F-C5FC-4E6D-8996-5186C4CA475E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86EDBFF8-D057-4D9E-8335-9CB6CC6DA86D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86EDBFF8-D057-4D9E-8335-9CB6CC6DA86D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86EDBFF8-D057-4D9E-8335-9CB6CC6DA86D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86EDBFF8-D057-4D9E-8335-9CB6CC6DA86D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9AE71586-33B1-4ECE-8450-7DF6C8C01085}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9AE71586-33B1-4ECE-8450-7DF6C8C01085}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9AE71586-33B1-4ECE-8450-7DF6C8C01085}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9AE71586-33B1-4ECE-8450-7DF6C8C01085}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
