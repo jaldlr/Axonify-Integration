@@ -126,4 +126,102 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="baseLineMetricsId" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="cede44a3-13de-45ac-922a-5ddb34f186cc" ChangeDateTime="03/28/2018 17:24:37">
+    <Property Name="ElementName" Value="[dbo].[API_EmployeeBaselineMetrics].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[API_EmployeeBaselineMetrics]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="baselineMetricId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="8bb8d81e-b3cc-496d-a8c9-bba975c15f31" ChangeDateTime="03/28/2018 17:28:09">
+    <Property Name="ElementName" Value="[dbo].[API_EmployeeCurrentMetric].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[API_EmployeeCurrentMetric]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="employeeId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="526ff069-f1d2-42f0-a0f5-ab93ae7c58a4" ChangeDateTime="03/28/2018 17:28:42">
+    <Property Name="ElementName" Value="[dbo].[API_EmployeeCurrentMetric].[employeeId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[API_EmployeeCurrentMetric]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="currentMetricId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="30449ee6-e05c-4e02-9578-95f6eff45e33" ChangeDateTime="03/28/2018 17:30:50">
+    <Property Name="ElementName" Value="[dbo].[API_EmployeeOveralMetric].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[API_EmployeeOveralMetric]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="overallMetricId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="db1d1944-a92c-4c68-a1ca-9f20de686cbd" ChangeDateTime="03/28/2018 17:33:02">
+    <Property Name="ElementName" Value="[dbo].[API_userPoint].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[API_userPoint]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="employeeId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="359e48ef-e3b5-40a2-9c76-34817604a3b7" ChangeDateTime="03/28/2018 17:33:20">
+    <Property Name="ElementName" Value="[dbo].[API_userPoint].[points]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[API_userPoint]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Points" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="9a606bde-637f-46f5-8a16-f6d338a02b7e" ChangeDateTime="03/28/2018 17:34:38">
+    <Property Name="ElementName" Value="[dbo].[API_UserTimeSpent].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[API_UserTimeSpent]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="userTimeSpentId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="777e5976-905a-44fb-9dc6-0cadad4606a0" ChangeDateTime="03/28/2018 17:40:23">
+    <Property Name="ElementName" Value="[dbo].[API_User].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[API_User]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="employeeId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="94d96e56-2c51-4ec9-93f9-ccce906cde59" ChangeDateTime="03/28/2018 17:41:37">
+    <Property Name="ElementName" Value="[dbo].[API_User].[use]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[API_User]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="userName" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="393f086b-6b4c-4229-9c67-8d9aee39c9f3" ChangeDateTime="03/28/2018 17:41:46">
+    <Property Name="ElementName" Value="[dbo].[API_User].[userName]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[API_User]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Username" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="8467ff09-24af-4e2d-9a7a-345586b491c2" ChangeDateTime="03/28/2018 17:43:51">
+    <Property Name="ElementName" Value="[dbo].[API_User].[language]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[API_User]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="languageId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="78d0a0e6-df27-4f2f-a472-9d0f1fe0baea" ChangeDateTime="03/28/2018 17:45:05">
+    <Property Name="ElementName" Value="[dbo].[API_User].[areasOfInterest]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[API_User]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="areasOfInterestId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="fd94f3a9-cf39-49e8-81ae-2e6ca0f8ca29" ChangeDateTime="03/28/2018 17:50:52">
+    <Property Name="ElementName" Value="[dbo].[API_Team].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[API_Team]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="teamId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="59b0dfd8-8c97-4b84-8bfa-441c732478f8" ChangeDateTime="03/28/2018 17:55:54">
+    <Property Name="ElementName" Value="[dbo].[API_UserBehavior].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[API_UserBehavior]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="userBehaviorId" />
+  </Operation>
 </Operations>
