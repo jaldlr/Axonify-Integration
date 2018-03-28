@@ -62,13 +62,22 @@
     <Folder Include="Functions" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="Tables\Temp1.sql" />
-    <Build Include="Tables\Temp2.sql" />
-    <Build Include="Tables\API_IntroductoryCompletions.sql" />
     <Build Include="Tables\API_Category.sql" />
     <Build Include="Tables\API_Subject.sql" />
     <Build Include="Tables\API_Topic.sql" />
     <Build Include="Tables\API_Course.sql" />
+    <Build Include="Tables\API_CertificationCompletion.sql" />
+    <Build Include="Tables\API_EmployeeTopicGraduation.sql" />
+    <Build Include="Tables\API_EmployeeSubjectGraduation.sql" />
+    <Build Include="Tables\API_KnowladgeMap.sql" />
+    <Build Include="Tables\API_EmployeeBaselineMetric.sql" />
+    <Build Include="Tables\API_EmployeeCurrentMetric.sql" />
+    <Build Include="Tables\API_EmployeeOveralMetric.sql" />
+    <Build Include="Tables\API_userPoint.sql" />
+    <Build Include="Tables\API_UserTimeSpent.sql" />
+    <Build Include="Tables\API_User.sql" />
+    <Build Include="Tables\API_Team.sql" />
+    <Build Include="Tables\API_UserBehavior.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="AxonifyIntegration.Database.publish.xml" />
