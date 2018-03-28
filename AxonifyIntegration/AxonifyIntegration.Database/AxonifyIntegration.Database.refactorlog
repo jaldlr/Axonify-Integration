@@ -49,4 +49,81 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="courseCode" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="a55b382c-111f-48cf-a886-af244e90e2ea" ChangeDateTime="03/28/2018 16:29:49">
+    <Property Name="ElementName" Value="[dbo].[API_CertificationCompletion].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[API_CertificationCompletion]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="employeeId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="da9bef47-f493-4ecb-bb6d-1a4b4a11198f" ChangeDateTime="03/28/2018 16:35:07">
+    <Property Name="ElementName" Value="[dbo].[API_CertificationCompletion].[completionTimestamp]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[API_CertificationCompletion]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="graduationTimestamp" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="0304a9bc-a2ad-49a4-9d77-635258f9088f" ChangeDateTime="03/28/2018 16:35:14">
+    <Property Name="ElementName" Value="[dbo].[API_CertificationCompletion].[assessmentScore]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[API_CertificationCompletion]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="baselineAverage" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="68f451db-dd5a-467d-bd59-021b0a50e6c3" ChangeDateTime="03/28/2018 16:35:35">
+    <Property Name="ElementName" Value="[dbo].[API_CertificationCompletion].[timeSpent]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[API_CertificationCompletion]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="baselineCorrectAnswerCount" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="ecc56550-1d4d-42de-a3c6-ed4c2e7ca26c" ChangeDateTime="03/28/2018 16:49:29">
+    <Property Name="ElementName" Value="[dbo].[API_KnowladgeMap].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[API_KnowladgeMap]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="knowladgeId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="4d6085ff-3e79-46c9-a98f-5fe0249c2766" ChangeDateTime="03/28/2018 16:49:41">
+    <Property Name="ElementName" Value="[dbo].[API_KnowladgeMap].[knowladgeId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[API_KnowladgeMap]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="knowledgeId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="6558d8e7-915c-41e4-bc06-72ef68ff98a8" ChangeDateTime="03/28/2018 16:50:05">
+    <Property Name="ElementName" Value="[dbo].[API_KnowledgeMap].[knowledgeId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[API_KnowledgeMap]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="knowledgeMapId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="4fe5f885-8b2a-4dbd-a370-7554cc02e622" ChangeDateTime="03/28/2018 17:12:04">
+    <Property Name="ElementName" Value="[dbo].[API_KnowledgeMap].[learnerStatus]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[API_KnowledgeMap]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="learnerStatusId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="f699fca9-3579-4539-8051-9d65e5d833ee" ChangeDateTime="03/28/2018 17:12:16">
+    <Property Name="ElementName" Value="[dbo].[API_KnowledgeMap].[certificationStatus]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[API_KnowledgeMap]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="certificationStatusId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="9c9074d1-a302-4373-b415-59653a4e955b" ChangeDateTime="03/28/2018 17:12:59">
+    <Property Name="ElementName" Value="[dbo].[API_KnowledgeMap].[introductoryStatus]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[API_KnowledgeMap]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="introductoryStatusId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="86010884-9a54-4ca8-af43-5eb1c571d4f7" ChangeDateTime="03/28/2018 17:18:28">
+    <Property Name="ElementName" Value="[dbo].[API_KnowledgeMap].[baseLine]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[API_KnowledgeMap]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="baseLineMetricsId" />
+  </Operation>
 </Operations>
