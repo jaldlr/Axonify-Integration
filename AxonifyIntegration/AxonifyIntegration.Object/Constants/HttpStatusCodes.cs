@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Net.Http;
+using System.Net;
 
 using AxonifyIntegration.Object.Models;
 
@@ -10,84 +12,64 @@ namespace AxonifyIntegration.Object.Constants
 {
     public class HttpStatusCodes
     {
-        public static HttpStatusCodeMod statusCode200 = new HttpStatusCodeMod()
+        public static HttpResponseMessage statusCode200 = new HttpResponseMessage((HttpStatusCode)200)
         {
-            codeNumber = 200,
-            message = "OK",
-            description = "Everything is working",
-            isSuccess = true
+            Content = new StringContent("Everything is working."),
+            ReasonPhrase = "OK"
         };
 
-        public static HttpStatusCodeMod statusCode304 = new HttpStatusCodeMod()
+        public static HttpResponseMessage statusCode304 = new HttpResponseMessage((HttpStatusCode)304)
         {
-            codeNumber = 304,
-            message = "Not Modified",
-            description = "No changes were have been made to the target resource",
-            isSuccess = false
+            Content = new StringContent("No changes were have been made to the target resource."),
+            ReasonPhrase = "Not Modified"
         };
 
-        public static HttpStatusCodeMod statusCode400 = new HttpStatusCodeMod()
+        public static HttpResponseMessage statusCode400 = new HttpResponseMessage((HttpStatusCode)400)
         {
-            codeNumber = 400,
-            message = "Bad Request",
-            description = "The request was invalid or cannot be served. See error payload for details",
-            isSuccess = false
+            Content = new StringContent("The request was invalid or cannot be served."),
+            ReasonPhrase = "Bad Request"
         };
 
-        public static HttpStatusCodeMod statusCode401 = new HttpStatusCodeMod()
+        public static HttpResponseMessage statusCode401 = new HttpResponseMessage((HttpStatusCode)401)
         {
-            codeNumber = 401,
-            message = "Unauthorized",
-            description = "The request requires an user authentication",
-            isSuccess = false
+            Content = new StringContent("The request requires an user authentication."),
+            ReasonPhrase = "Unauthorized"
         };
 
-        public static HttpStatusCodeMod statusCode403 = new HttpStatusCodeMod()
+        public static HttpResponseMessage statusCode403 = new HttpResponseMessage((HttpStatusCode)403)
         {
-            codeNumber = 403,
-            message = "Forbidden",
-            description = "The server has refused the request or the access is not allowed. See error payload for details",
-            isSuccess = false
+            Content = new StringContent("The server has refused the request or the access is not allowed."),
+            ReasonPhrase = "Forbidden"
         };
 
-        public static HttpStatusCodeMod statusCode404 = new HttpStatusCodeMod()
+        public static HttpResponseMessage statusCode404 = new HttpResponseMessage((HttpStatusCode)404)
         {
-            codeNumber = 404,
-            message = "Not found",
-            description = "There is no resource behind the URI",
-            isSuccess = false
+            Content = new StringContent("There is no resource behind the URI."),
+            ReasonPhrase = "Not found"
         };
 
-        public static HttpStatusCodeMod statusCode422 = new HttpStatusCodeMod()
+        public static HttpResponseMessage statusCode422 = new HttpResponseMessage((HttpStatusCode)422)
         {
-            codeNumber = 422,
-            message = "Unprocessable Entity",
-            description = "Mandatory fields missing from payload. See error payload for details",
-            isSuccess = false
+            Content = new StringContent("Mandatory fields missing from request."),
+            ReasonPhrase = "Unprocessable Entity"
         };
 
-        public static HttpStatusCodeMod statusCode429 = new HttpStatusCodeMod()
+        public static HttpResponseMessage statusCode429 = new HttpResponseMessage((HttpStatusCode)429)
         {
-            codeNumber = 429,
-            message = "Too many requests",
-            description = "",
-            isSuccess = false
+            Content = new StringContent(""),
+            ReasonPhrase = "Too many requests"
         };
 
-        public static HttpStatusCodeMod statusCode500 = new HttpStatusCodeMod()
+        public static HttpResponseMessage statusCode500 = new HttpResponseMessage((HttpStatusCode)500)
         {
-            codeNumber = 500,
-            message = "Internal Server Error",
-            description = "See error payload for details",
-            isSuccess = false
+            Content = new StringContent("See error payload for details."),
+            ReasonPhrase = "Internal Server Error"
         };
 
-        public static HttpStatusCodeMod statusCode503 = new HttpStatusCodeMod()
+        public static HttpResponseMessage statusCode503 = new HttpResponseMessage((HttpStatusCode)503)
         {
-            codeNumber = 503,
-            message = "Service Unavailable",
-            description = "Used to indicate maintenance",
-            isSuccess = false
+            Content = new StringContent("Server in maintenance."),
+            ReasonPhrase = "Service Unavailable"
         };
     }
 }

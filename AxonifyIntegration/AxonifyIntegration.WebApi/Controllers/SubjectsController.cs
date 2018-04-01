@@ -7,9 +7,12 @@ using System.Web.Http;
 
 using AxonifyIntegration.Data.DataModels;
 using AxonifyIntegration.Object.Constants;
+using AxonifyIntegration.WebApi.Utilities;
 
 namespace AxonifyIntegration.WebApi.Controllers
 {
+    [AxonifyAuthorization]
+    [AxonifyExceptionHandler]
     public class SubjectsController : ApiController
     {
         #region Properties
@@ -31,67 +34,107 @@ namespace AxonifyIntegration.WebApi.Controllers
         // GET: api/Subjects
         public HttpResponseMessage Get()
         {
-            IEnumerable<API_Subject> subjects = (from s in this._dbContext.API_Subject select s).ToList();
-            var result = new
+            HttpResponseMessage response;
+
+            try
             {
-                subjects = subjects
-            };
-            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result);
+                API_Subject tt = null;
+                tt.ToString();
+                IEnumerable<API_Subject> subjects = (from s in this._dbContext.API_Subject select s).ToList();
+                var result = new
+                {
+                    subjects = subjects
+                };
+                response = Request.CreateResponse(HttpStatusCode.OK, result);
+            }
+            catch(Exception ex)
+            {
+                response = HttpStatusCodes.statusCode500;
+            }
+
             return response;
         }
 
         // GET: api/Subjects/5
         public HttpResponseMessage Get(string id)
         {
-            API_Subject subject = (from s in this._dbContext.API_Subject where s.subjectExternalId.Equals(id, StringComparison.OrdinalIgnoreCase) select s).FirstOrDefault();
-            
-            var result = new
+            HttpResponseMessage response;
+
+            try
             {
-                subject = subject
-            };
-            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result);
+                API_Subject subject = (from s in this._dbContext.API_Subject where s.subjectExternalId.Equals(id, StringComparison.OrdinalIgnoreCase) select s).FirstOrDefault();
+
+                var result = new
+                {
+                    subject = subject
+                };
+                response = Request.CreateResponse(HttpStatusCode.OK, result);
+            }
+            catch (Exception ex)
+            {
+                response = HttpStatusCodes.statusCode500;
+            }
+            
             return response;
         }
 
         // POST: api/Subjects
         public HttpResponseMessage Post(API_Subject value)
         {
-            if (value != null && ModelState.IsValid)
-            {
-                API_Subject subject = (from s in this._dbContext.API_Subject where s.subjectExternalId.Equals(value.subjectExternalId, StringComparison.OrdinalIgnoreCase) select s).FirstOrDefault();
-                if(subject == null)
-                {
-                    this._dbContext.API_Subject.Add(value);
-                }else
-                {
-                    subject.subjectName = value.subjectName;
-                    subject.categoryExternalId = value.categoryExternalId;
-                    subject.revision = value.revision;
-                }
-                this._dbContext.SaveChanges();
+            HttpResponseMessage response;
 
-                var result = new
-                {
-                    status = "OK"
-                };
-                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result);
-                return response;
-            }
-            else
+            try
             {
-                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, new Exception(HttpStatusCodes.statusCode400.message));
+                if (value != null && ModelState.IsValid)
+                {
+                    API_Subject subject = (from s in this._dbContext.API_Subject where s.subjectExternalId.Equals(value.subjectExternalId, StringComparison.OrdinalIgnoreCase) select s).FirstOrDefault();
+                    if (subject == null)
+                    {
+                        this._dbContext.API_Subject.Add(value);
+                    }
+                    else
+                    {
+                        subject.subjectName = value.subjectName;
+                        subject.categoryExternalId = value.categoryExternalId;
+                        subject.revision = value.revision;
+                    }
+                    this._dbContext.SaveChanges();
+
+                    var result = new
+                    {
+                        status = "OK"
+                    };
+                    response = Request.CreateResponse(HttpStatusCode.OK, result);
+                }
+                else
+                {
+                    response = HttpStatusCodes.statusCode422;
+                }
             }
+            catch (Exception ex)
+            {
+                response = HttpStatusCodes.statusCode500;
+            }
+
+            return response;
         }
 
         // PUT: api/Subjects/5
         public HttpResponseMessage Put(string id, API_Subject value)
         {
-            if(value != null)
+            try
             {
-                value.subjectExternalId = id;
-            }
+                if (value != null)
+                {
+                    value.subjectExternalId = id;
+                }
 
-            return this.Post(value);
+                return this.Post(value);
+            }
+            catch (Exception ex)
+            {
+                return HttpStatusCodes.statusCode500;
+            }
         }
 
         #endregion
