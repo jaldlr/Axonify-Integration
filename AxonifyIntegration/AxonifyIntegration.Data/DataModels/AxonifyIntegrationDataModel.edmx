@@ -4,43 +4,630 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="AxonifyIntegrationModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="Temp1">
+    <Schema Namespace="AxonifyIntegrationModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="API_Category">
           <Key>
-            <PropertyRef Name="Id" />
+            <PropertyRef Name="categoryExternalId" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="name" Type="varchar" MaxLength="100" />
+          <Property Name="categoryExternalId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="categoryName" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="revision" Type="nvarchar" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="API_CertificationCompletion">
+          <Key>
+            <PropertyRef Name="employeeId" />
+          </Key>
+          <Property Name="employeeId" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="categoryExternalId" Type="nvarchar" MaxLength="60" />
+          <Property Name="subjectExternalId" Type="nvarchar" MaxLength="60" />
+          <Property Name="topicExternalId" Type="nvarchar" MaxLength="60" />
+          <Property Name="completionTimestamp" Type="datetime" />
+          <Property Name="assessmentScore" Type="decimal" Precision="2" Scale="1" />
+          <Property Name="timeSpent" Type="int" />
+        </EntityType>
+        <EntityType Name="API_Course">
+          <Key>
+            <PropertyRef Name="courseCode" />
+          </Key>
+          <Property Name="courseCode" Type="nvarchar" MaxLength="53" Nullable="false" />
+          <Property Name="courseName" Type="nvarchar" MaxLength="177" Nullable="false" />
+        </EntityType>
+        <EntityType Name="API_EmployeeBaselineMetric">
+          <Key>
+            <PropertyRef Name="baselineMetricId" />
+          </Key>
+          <Property Name="baselineMetricId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="employeeId" Type="nvarchar" MaxLength="255" />
+          <Property Name="totalAnswerCount" Type="int" />
+          <Property Name="correctAnswerCount" Type="int" />
+          <Property Name="percentCorrect" Type="decimal" Precision="2" Scale="2" />
+          <Property Name="totalConfidence" Type="int" />
+          <Property Name="averageConfidence" Type="decimal" Precision="2" Scale="2" />
+        </EntityType>
+        <EntityType Name="API_EmployeeCurrentMetric">
+          <Key>
+            <PropertyRef Name="currentMetricId" />
+          </Key>
+          <Property Name="currentMetricId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="employeeId" Type="nvarchar" MaxLength="255" />
+          <Property Name="totalAnswerCount" Type="int" />
+          <Property Name="correctAnswerCount" Type="int" />
+          <Property Name="percentCorrect" Type="decimal" Precision="2" Scale="2" />
+          <Property Name="totalConfidence" Type="int" />
+          <Property Name="averageConfidence" Type="numeric" Precision="2" Scale="2" />
+        </EntityType>
+        <EntityType Name="API_EmployeeOveralMetric">
+          <Key>
+            <PropertyRef Name="overallMetricId" />
+          </Key>
+          <Property Name="overallMetricId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="employeeId" Type="nvarchar" MaxLength="255" />
+          <Property Name="totalAnswerCount" Type="int" />
+          <Property Name="correctAnswerCount" Type="int" />
+          <Property Name="percentCorrect" Type="decimal" Precision="2" Scale="2" />
+          <Property Name="totalConfidence" Type="int" />
+          <Property Name="averageConfidence" Type="decimal" Precision="2" Scale="2" />
+        </EntityType>
+        <EntityType Name="API_EmployeeTopicGraduation">
+          <Key>
+            <PropertyRef Name="employeeId" />
+          </Key>
+          <Property Name="employeeId" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="categoryExternalId" Type="nvarchar" MaxLength="60" />
+          <Property Name="subjectExternalId" Type="nvarchar" MaxLength="60" />
+          <Property Name="topicExternalId" Type="nvarchar" MaxLength="60" />
+          <Property Name="graduationTimestamp" Type="datetime" />
+          <Property Name="timeSpent" Type="int" />
+          <Property Name="baselineMetricId" Type="int" />
+          <Property Name="currentMetricId" Type="int" />
+          <Property Name="overalMetricId" Type="int" />
+        </EntityType>
+        <EntityType Name="API_EmplyeeSubjectCompletion">
+          <Key>
+            <PropertyRef Name="employeeId" />
+          </Key>
+          <Property Name="employeeId" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="categoryExternalId" Type="nvarchar" MaxLength="60" />
+          <Property Name="subjectExternalId" Type="nvarchar" MaxLength="60" />
+          <Property Name="graduationTimestamp" Type="datetime" />
+          <Property Name="timeSpent" Type="int" />
+          <Property Name="baselineMetricId" Type="int" />
+          <Property Name="currentMetricId" Type="int" />
+          <Property Name="overalMetricId" Type="int" />
+        </EntityType>
+        <EntityType Name="API_KnowledgeMap">
+          <Key>
+            <PropertyRef Name="knowledgeMapId" />
+          </Key>
+          <Property Name="knowledgeMapId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="employeeId" Type="nvarchar" MaxLength="255" />
+          <Property Name="categoryExternalId" Type="nvarchar" MaxLength="60" />
+          <Property Name="subjectExternalId" Type="nvarchar" MaxLength="60" />
+          <Property Name="topicExternalId" Type="nvarchar" MaxLength="60" />
+          <Property Name="learnerStatusId" Type="int" />
+          <Property Name="certificationStatusId" Type="int" />
+          <Property Name="introductoryStatusId" Type="int" />
+          <Property Name="trainingModuleCompletedId" Type="int" />
+          <Property Name="trainingModuleLastCompletionTimestamp" Type="datetime" />
+          <Property Name="topicGraduationTimestamp" Type="datetime" />
+        </EntityType>
+        <EntityType Name="API_Subject">
+          <Key>
+            <PropertyRef Name="subjectExternalId" />
+          </Key>
+          <Property Name="subjectExternalId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="categoryExternalId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="subjectName" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="revision" Type="nvarchar" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="API_Team">
+          <Key>
+            <PropertyRef Name="teamId" />
+          </Key>
+          <Property Name="teamId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="parentName" Type="nvarchar" MaxLength="60" />
+          <Property Name="teamName" Type="nvarchar" MaxLength="60" />
+        </EntityType>
+        <EntityType Name="API_Topic">
+          <Key>
+            <PropertyRef Name="topicExternalId" />
+          </Key>
+          <Property Name="topicExternalId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="subjectExternalId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="topicName" Type="nvarchar" MaxLength="60" />
+          <Property Name="revision" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="API_User">
+          <Key>
+            <PropertyRef Name="employeeId" />
+          </Key>
+          <Property Name="employeeId" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="active" Type="bit" />
+          <Property Name="fullName" Type="nvarchar" MaxLength="100" />
+          <Property Name="nickName" Type="nvarchar" MaxLength="45" />
+          <Property Name="Username" Type="nvarchar" MaxLength="60" />
+          <Property Name="md5Password" Type="nvarchar(max)" />
+          <Property Name="userTypeId" Type="int" />
+          <Property Name="Email" Type="nvarchar" MaxLength="75" />
+          <Property Name="languageId" Type="int" />
+          <Property Name="hireDate" Type="datetime" />
+          <Property Name="jobTitle" Type="nvarchar" MaxLength="255" />
+          <Property Name="department" Type="nvarchar" MaxLength="60" />
+          <Property Name="team" Type="nvarchar" MaxLength="60" />
+          <Property Name="lineOfBusiness" Type="nvarchar" MaxLength="60" />
+          <Property Name="areasOfInterestId" Type="int" />
+          <Property Name="suspended" Type="bit" />
+        </EntityType>
+        <EntityType Name="API_UserBehavior">
+          <Key>
+            <PropertyRef Name="userBehaviorId" />
+          </Key>
+          <Property Name="userBehaviorId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="observerEmployeeId" Type="nvarchar" MaxLength="255" />
+          <Property Name="observeeEmployeeId" Type="nvarchar" MaxLength="255" />
+          <Property Name="observationDateTime" Type="datetime" />
+          <Property Name="behaviorCode" Type="nvarchar" MaxLength="60" />
+          <Property Name="positiveObservations" Type="int" />
+          <Property Name="negativeObservations" Type="int" />
+          <Property Name="comment" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="API_userPoint">
+          <Key>
+            <PropertyRef Name="employeeId" />
+          </Key>
+          <Property Name="employeeId" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Points" Type="int" />
+        </EntityType>
+        <EntityType Name="API_UserTimeSpent">
+          <Key>
+            <PropertyRef Name="userTimeSpentId" />
+          </Key>
+          <Property Name="userTimeSpentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="employeeId" Type="nvarchar" MaxLength="255" />
+          <Property Name="totalTime" Type="int" />
+          <Property Name="dailyTrainingTime" Type="int" />
+          <Property Name="introductoryTrainingTime" Type="int" />
+          <Property Name="certificationTrainingTime" Type="int" />
+          <Property Name="refresherTrainingTime" Type="int" />
+          <Property Name="extraQuestionTrainingTime" Type="int" />
+          <Property Name="extraTrainingModueTime" Type="int" />
+          <Property Name="gamePlayTime" Type="int" />
         </EntityType>
         <EntityContainer Name="AxonifyIntegrationModelStoreContainer">
-          <EntitySet Name="Temp1" EntityType="Self.Temp1" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="API_Category" EntityType="Self.API_Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="API_CertificationCompletion" EntityType="Self.API_CertificationCompletion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="API_Course" EntityType="Self.API_Course" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="API_EmployeeBaselineMetric" EntityType="Self.API_EmployeeBaselineMetric" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="API_EmployeeCurrentMetric" EntityType="Self.API_EmployeeCurrentMetric" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="API_EmployeeOveralMetric" EntityType="Self.API_EmployeeOveralMetric" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="API_EmployeeTopicGraduation" EntityType="Self.API_EmployeeTopicGraduation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="API_EmplyeeSubjectCompletion" EntityType="Self.API_EmplyeeSubjectCompletion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="API_KnowledgeMap" EntityType="Self.API_KnowledgeMap" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="API_Subject" EntityType="Self.API_Subject" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="API_Team" EntityType="Self.API_Team" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="API_Topic" EntityType="Self.API_Topic" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="API_User" EntityType="Self.API_User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="API_UserBehavior" EntityType="Self.API_UserBehavior" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="API_userPoint" EntityType="Self.API_userPoint" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="API_UserTimeSpent" EntityType="Self.API_UserTimeSpent" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="AxonifyIntegrationModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Temp1">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityContainer Name="AxonifyIntegrationEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Temp1" EntityType="Self.Temp1" />
+          <EntitySet Name="API_Category" EntityType="AxonifyIntegrationModel.API_Category" />
+          <EntitySet Name="API_CertificationCompletion" EntityType="AxonifyIntegrationModel.API_CertificationCompletion" />
+          <EntitySet Name="API_Course" EntityType="AxonifyIntegrationModel.API_Course" />
+          <EntitySet Name="API_EmployeeBaselineMetric" EntityType="AxonifyIntegrationModel.API_EmployeeBaselineMetric" />
+          <EntitySet Name="API_EmployeeCurrentMetric" EntityType="AxonifyIntegrationModel.API_EmployeeCurrentMetric" />
+          <EntitySet Name="API_EmployeeOveralMetric" EntityType="AxonifyIntegrationModel.API_EmployeeOveralMetric" />
+          <EntitySet Name="API_EmployeeTopicGraduation" EntityType="AxonifyIntegrationModel.API_EmployeeTopicGraduation" />
+          <EntitySet Name="API_EmplyeeSubjectCompletion" EntityType="AxonifyIntegrationModel.API_EmplyeeSubjectCompletion" />
+          <EntitySet Name="API_KnowledgeMap" EntityType="AxonifyIntegrationModel.API_KnowledgeMap" />
+          <EntitySet Name="API_Subject" EntityType="AxonifyIntegrationModel.API_Subject" />
+          <EntitySet Name="API_Team" EntityType="AxonifyIntegrationModel.API_Team" />
+          <EntitySet Name="API_Topic" EntityType="AxonifyIntegrationModel.API_Topic" />
+          <EntitySet Name="API_User" EntityType="AxonifyIntegrationModel.API_User" />
+          <EntitySet Name="API_UserBehavior" EntityType="AxonifyIntegrationModel.API_UserBehavior" />
+          <EntitySet Name="API_userPoint" EntityType="AxonifyIntegrationModel.API_userPoint" />
+          <EntitySet Name="API_UserTimeSpent" EntityType="AxonifyIntegrationModel.API_UserTimeSpent" />
         </EntityContainer>
+        <EntityType Name="API_Category">
+          <Key>
+            <PropertyRef Name="categoryExternalId" />
+          </Key>
+          <Property Name="categoryExternalId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="categoryName" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="revision" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="API_CertificationCompletion">
+          <Key>
+            <PropertyRef Name="employeeId" />
+          </Key>
+          <Property Name="employeeId" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="categoryExternalId" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="subjectExternalId" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="topicExternalId" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="completionTimestamp" Type="DateTime" Precision="3" />
+          <Property Name="assessmentScore" Type="Decimal" Precision="2" Scale="1" />
+          <Property Name="timeSpent" Type="Int32" />
+        </EntityType>
+        <EntityType Name="API_Course">
+          <Key>
+            <PropertyRef Name="courseCode" />
+          </Key>
+          <Property Name="courseCode" Type="String" Nullable="false" MaxLength="53" FixedLength="false" Unicode="true" />
+          <Property Name="courseName" Type="String" Nullable="false" MaxLength="177" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="API_EmployeeBaselineMetric">
+          <Key>
+            <PropertyRef Name="baselineMetricId" />
+          </Key>
+          <Property Name="baselineMetricId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="employeeId" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="totalAnswerCount" Type="Int32" />
+          <Property Name="correctAnswerCount" Type="Int32" />
+          <Property Name="percentCorrect" Type="Decimal" Precision="2" Scale="2" />
+          <Property Name="totalConfidence" Type="Int32" />
+          <Property Name="averageConfidence" Type="Decimal" Precision="2" Scale="2" />
+        </EntityType>
+        <EntityType Name="API_EmployeeCurrentMetric">
+          <Key>
+            <PropertyRef Name="currentMetricId" />
+          </Key>
+          <Property Name="currentMetricId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="employeeId" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="totalAnswerCount" Type="Int32" />
+          <Property Name="correctAnswerCount" Type="Int32" />
+          <Property Name="percentCorrect" Type="Decimal" Precision="2" Scale="2" />
+          <Property Name="totalConfidence" Type="Int32" />
+          <Property Name="averageConfidence" Type="Decimal" Precision="2" Scale="2" />
+        </EntityType>
+        <EntityType Name="API_EmployeeOveralMetric">
+          <Key>
+            <PropertyRef Name="overallMetricId" />
+          </Key>
+          <Property Name="overallMetricId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="employeeId" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="totalAnswerCount" Type="Int32" />
+          <Property Name="correctAnswerCount" Type="Int32" />
+          <Property Name="percentCorrect" Type="Decimal" Precision="2" Scale="2" />
+          <Property Name="totalConfidence" Type="Int32" />
+          <Property Name="averageConfidence" Type="Decimal" Precision="2" Scale="2" />
+        </EntityType>
+        <EntityType Name="API_EmployeeTopicGraduation">
+          <Key>
+            <PropertyRef Name="employeeId" />
+          </Key>
+          <Property Name="employeeId" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="categoryExternalId" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="subjectExternalId" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="topicExternalId" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="graduationTimestamp" Type="DateTime" Precision="3" />
+          <Property Name="timeSpent" Type="Int32" />
+          <Property Name="baselineMetricId" Type="Int32" />
+          <Property Name="currentMetricId" Type="Int32" />
+          <Property Name="overalMetricId" Type="Int32" />
+        </EntityType>
+        <EntityType Name="API_EmplyeeSubjectCompletion">
+          <Key>
+            <PropertyRef Name="employeeId" />
+          </Key>
+          <Property Name="employeeId" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="categoryExternalId" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="subjectExternalId" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="graduationTimestamp" Type="DateTime" Precision="3" />
+          <Property Name="timeSpent" Type="Int32" />
+          <Property Name="baselineMetricId" Type="Int32" />
+          <Property Name="currentMetricId" Type="Int32" />
+          <Property Name="overalMetricId" Type="Int32" />
+        </EntityType>
+        <EntityType Name="API_KnowledgeMap">
+          <Key>
+            <PropertyRef Name="knowledgeMapId" />
+          </Key>
+          <Property Name="knowledgeMapId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="employeeId" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="categoryExternalId" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="subjectExternalId" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="topicExternalId" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="learnerStatusId" Type="Int32" />
+          <Property Name="certificationStatusId" Type="Int32" />
+          <Property Name="introductoryStatusId" Type="Int32" />
+          <Property Name="trainingModuleCompletedId" Type="Int32" />
+          <Property Name="trainingModuleLastCompletionTimestamp" Type="DateTime" Precision="3" />
+          <Property Name="topicGraduationTimestamp" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="API_Subject">
+          <Key>
+            <PropertyRef Name="subjectExternalId" />
+          </Key>
+          <Property Name="subjectExternalId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="categoryExternalId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="subjectName" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="revision" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="API_Team">
+          <Key>
+            <PropertyRef Name="teamId" />
+          </Key>
+          <Property Name="teamId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="parentName" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="teamName" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="API_Topic">
+          <Key>
+            <PropertyRef Name="topicExternalId" />
+          </Key>
+          <Property Name="topicExternalId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="subjectExternalId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="topicName" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="revision" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="API_User">
+          <Key>
+            <PropertyRef Name="employeeId" />
+          </Key>
+          <Property Name="employeeId" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="active" Type="Boolean" />
+          <Property Name="fullName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="nickName" Type="String" MaxLength="45" FixedLength="false" Unicode="true" />
+          <Property Name="Username" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="md5Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="userTypeId" Type="Int32" />
+          <Property Name="Email" Type="String" MaxLength="75" FixedLength="false" Unicode="true" />
+          <Property Name="languageId" Type="Int32" />
+          <Property Name="hireDate" Type="DateTime" Precision="3" />
+          <Property Name="jobTitle" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="department" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="team" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="lineOfBusiness" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="areasOfInterestId" Type="Int32" />
+          <Property Name="suspended" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="API_UserBehavior">
+          <Key>
+            <PropertyRef Name="userBehaviorId" />
+          </Key>
+          <Property Name="userBehaviorId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="observerEmployeeId" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="observeeEmployeeId" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="observationDateTime" Type="DateTime" Precision="3" />
+          <Property Name="behaviorCode" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="positiveObservations" Type="Int32" />
+          <Property Name="negativeObservations" Type="Int32" />
+          <Property Name="comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="API_userPoint">
+          <Key>
+            <PropertyRef Name="employeeId" />
+          </Key>
+          <Property Name="employeeId" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Points" Type="Int32" />
+        </EntityType>
+        <EntityType Name="API_UserTimeSpent">
+          <Key>
+            <PropertyRef Name="userTimeSpentId" />
+          </Key>
+          <Property Name="userTimeSpentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="employeeId" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="totalTime" Type="Int32" />
+          <Property Name="dailyTrainingTime" Type="Int32" />
+          <Property Name="introductoryTrainingTime" Type="Int32" />
+          <Property Name="certificationTrainingTime" Type="Int32" />
+          <Property Name="refresherTrainingTime" Type="Int32" />
+          <Property Name="extraQuestionTrainingTime" Type="Int32" />
+          <Property Name="extraTrainingModueTime" Type="Int32" />
+          <Property Name="gamePlayTime" Type="Int32" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="AxonifyIntegrationModelStoreContainer" CdmEntityContainer="AxonifyIntegrationEntities">
-          <EntitySetMapping Name="Temp1">
-            <EntityTypeMapping TypeName="AxonifyIntegrationModel.Temp1">
-              <MappingFragment StoreEntitySet="Temp1">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="name" ColumnName="name" />
+          <EntitySetMapping Name="API_Category">
+            <EntityTypeMapping TypeName="AxonifyIntegrationModel.API_Category">
+              <MappingFragment StoreEntitySet="API_Category">
+                <ScalarProperty Name="revision" ColumnName="revision" />
+                <ScalarProperty Name="categoryName" ColumnName="categoryName" />
+                <ScalarProperty Name="categoryExternalId" ColumnName="categoryExternalId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="API_CertificationCompletion">
+            <EntityTypeMapping TypeName="AxonifyIntegrationModel.API_CertificationCompletion">
+              <MappingFragment StoreEntitySet="API_CertificationCompletion">
+                <ScalarProperty Name="timeSpent" ColumnName="timeSpent" />
+                <ScalarProperty Name="assessmentScore" ColumnName="assessmentScore" />
+                <ScalarProperty Name="completionTimestamp" ColumnName="completionTimestamp" />
+                <ScalarProperty Name="topicExternalId" ColumnName="topicExternalId" />
+                <ScalarProperty Name="subjectExternalId" ColumnName="subjectExternalId" />
+                <ScalarProperty Name="categoryExternalId" ColumnName="categoryExternalId" />
+                <ScalarProperty Name="employeeId" ColumnName="employeeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="API_Course">
+            <EntityTypeMapping TypeName="AxonifyIntegrationModel.API_Course">
+              <MappingFragment StoreEntitySet="API_Course">
+                <ScalarProperty Name="courseName" ColumnName="courseName" />
+                <ScalarProperty Name="courseCode" ColumnName="courseCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="API_EmployeeBaselineMetric">
+            <EntityTypeMapping TypeName="AxonifyIntegrationModel.API_EmployeeBaselineMetric">
+              <MappingFragment StoreEntitySet="API_EmployeeBaselineMetric">
+                <ScalarProperty Name="averageConfidence" ColumnName="averageConfidence" />
+                <ScalarProperty Name="totalConfidence" ColumnName="totalConfidence" />
+                <ScalarProperty Name="percentCorrect" ColumnName="percentCorrect" />
+                <ScalarProperty Name="correctAnswerCount" ColumnName="correctAnswerCount" />
+                <ScalarProperty Name="totalAnswerCount" ColumnName="totalAnswerCount" />
+                <ScalarProperty Name="employeeId" ColumnName="employeeId" />
+                <ScalarProperty Name="baselineMetricId" ColumnName="baselineMetricId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="API_EmployeeCurrentMetric">
+            <EntityTypeMapping TypeName="AxonifyIntegrationModel.API_EmployeeCurrentMetric">
+              <MappingFragment StoreEntitySet="API_EmployeeCurrentMetric">
+                <ScalarProperty Name="averageConfidence" ColumnName="averageConfidence" />
+                <ScalarProperty Name="totalConfidence" ColumnName="totalConfidence" />
+                <ScalarProperty Name="percentCorrect" ColumnName="percentCorrect" />
+                <ScalarProperty Name="correctAnswerCount" ColumnName="correctAnswerCount" />
+                <ScalarProperty Name="totalAnswerCount" ColumnName="totalAnswerCount" />
+                <ScalarProperty Name="employeeId" ColumnName="employeeId" />
+                <ScalarProperty Name="currentMetricId" ColumnName="currentMetricId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="API_EmployeeOveralMetric">
+            <EntityTypeMapping TypeName="AxonifyIntegrationModel.API_EmployeeOveralMetric">
+              <MappingFragment StoreEntitySet="API_EmployeeOveralMetric">
+                <ScalarProperty Name="averageConfidence" ColumnName="averageConfidence" />
+                <ScalarProperty Name="totalConfidence" ColumnName="totalConfidence" />
+                <ScalarProperty Name="percentCorrect" ColumnName="percentCorrect" />
+                <ScalarProperty Name="correctAnswerCount" ColumnName="correctAnswerCount" />
+                <ScalarProperty Name="totalAnswerCount" ColumnName="totalAnswerCount" />
+                <ScalarProperty Name="employeeId" ColumnName="employeeId" />
+                <ScalarProperty Name="overallMetricId" ColumnName="overallMetricId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="API_EmployeeTopicGraduation">
+            <EntityTypeMapping TypeName="AxonifyIntegrationModel.API_EmployeeTopicGraduation">
+              <MappingFragment StoreEntitySet="API_EmployeeTopicGraduation">
+                <ScalarProperty Name="overalMetricId" ColumnName="overalMetricId" />
+                <ScalarProperty Name="currentMetricId" ColumnName="currentMetricId" />
+                <ScalarProperty Name="baselineMetricId" ColumnName="baselineMetricId" />
+                <ScalarProperty Name="timeSpent" ColumnName="timeSpent" />
+                <ScalarProperty Name="graduationTimestamp" ColumnName="graduationTimestamp" />
+                <ScalarProperty Name="topicExternalId" ColumnName="topicExternalId" />
+                <ScalarProperty Name="subjectExternalId" ColumnName="subjectExternalId" />
+                <ScalarProperty Name="categoryExternalId" ColumnName="categoryExternalId" />
+                <ScalarProperty Name="employeeId" ColumnName="employeeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="API_EmplyeeSubjectCompletion">
+            <EntityTypeMapping TypeName="AxonifyIntegrationModel.API_EmplyeeSubjectCompletion">
+              <MappingFragment StoreEntitySet="API_EmplyeeSubjectCompletion">
+                <ScalarProperty Name="overalMetricId" ColumnName="overalMetricId" />
+                <ScalarProperty Name="currentMetricId" ColumnName="currentMetricId" />
+                <ScalarProperty Name="baselineMetricId" ColumnName="baselineMetricId" />
+                <ScalarProperty Name="timeSpent" ColumnName="timeSpent" />
+                <ScalarProperty Name="graduationTimestamp" ColumnName="graduationTimestamp" />
+                <ScalarProperty Name="subjectExternalId" ColumnName="subjectExternalId" />
+                <ScalarProperty Name="categoryExternalId" ColumnName="categoryExternalId" />
+                <ScalarProperty Name="employeeId" ColumnName="employeeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="API_KnowledgeMap">
+            <EntityTypeMapping TypeName="AxonifyIntegrationModel.API_KnowledgeMap">
+              <MappingFragment StoreEntitySet="API_KnowledgeMap">
+                <ScalarProperty Name="topicGraduationTimestamp" ColumnName="topicGraduationTimestamp" />
+                <ScalarProperty Name="trainingModuleLastCompletionTimestamp" ColumnName="trainingModuleLastCompletionTimestamp" />
+                <ScalarProperty Name="trainingModuleCompletedId" ColumnName="trainingModuleCompletedId" />
+                <ScalarProperty Name="introductoryStatusId" ColumnName="introductoryStatusId" />
+                <ScalarProperty Name="certificationStatusId" ColumnName="certificationStatusId" />
+                <ScalarProperty Name="learnerStatusId" ColumnName="learnerStatusId" />
+                <ScalarProperty Name="topicExternalId" ColumnName="topicExternalId" />
+                <ScalarProperty Name="subjectExternalId" ColumnName="subjectExternalId" />
+                <ScalarProperty Name="categoryExternalId" ColumnName="categoryExternalId" />
+                <ScalarProperty Name="employeeId" ColumnName="employeeId" />
+                <ScalarProperty Name="knowledgeMapId" ColumnName="knowledgeMapId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="API_Subject">
+            <EntityTypeMapping TypeName="AxonifyIntegrationModel.API_Subject">
+              <MappingFragment StoreEntitySet="API_Subject">
+                <ScalarProperty Name="revision" ColumnName="revision" />
+                <ScalarProperty Name="subjectName" ColumnName="subjectName" />
+                <ScalarProperty Name="categoryExternalId" ColumnName="categoryExternalId" />
+                <ScalarProperty Name="subjectExternalId" ColumnName="subjectExternalId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="API_Team">
+            <EntityTypeMapping TypeName="AxonifyIntegrationModel.API_Team">
+              <MappingFragment StoreEntitySet="API_Team">
+                <ScalarProperty Name="teamName" ColumnName="teamName" />
+                <ScalarProperty Name="parentName" ColumnName="parentName" />
+                <ScalarProperty Name="teamId" ColumnName="teamId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="API_Topic">
+            <EntityTypeMapping TypeName="AxonifyIntegrationModel.API_Topic">
+              <MappingFragment StoreEntitySet="API_Topic">
+                <ScalarProperty Name="revision" ColumnName="revision" />
+                <ScalarProperty Name="topicName" ColumnName="topicName" />
+                <ScalarProperty Name="subjectExternalId" ColumnName="subjectExternalId" />
+                <ScalarProperty Name="topicExternalId" ColumnName="topicExternalId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="API_User">
+            <EntityTypeMapping TypeName="AxonifyIntegrationModel.API_User">
+              <MappingFragment StoreEntitySet="API_User">
+                <ScalarProperty Name="suspended" ColumnName="suspended" />
+                <ScalarProperty Name="areasOfInterestId" ColumnName="areasOfInterestId" />
+                <ScalarProperty Name="lineOfBusiness" ColumnName="lineOfBusiness" />
+                <ScalarProperty Name="team" ColumnName="team" />
+                <ScalarProperty Name="department" ColumnName="department" />
+                <ScalarProperty Name="jobTitle" ColumnName="jobTitle" />
+                <ScalarProperty Name="hireDate" ColumnName="hireDate" />
+                <ScalarProperty Name="languageId" ColumnName="languageId" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="userTypeId" ColumnName="userTypeId" />
+                <ScalarProperty Name="md5Password" ColumnName="md5Password" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="nickName" ColumnName="nickName" />
+                <ScalarProperty Name="fullName" ColumnName="fullName" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="employeeId" ColumnName="employeeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="API_UserBehavior">
+            <EntityTypeMapping TypeName="AxonifyIntegrationModel.API_UserBehavior">
+              <MappingFragment StoreEntitySet="API_UserBehavior">
+                <ScalarProperty Name="comment" ColumnName="comment" />
+                <ScalarProperty Name="negativeObservations" ColumnName="negativeObservations" />
+                <ScalarProperty Name="positiveObservations" ColumnName="positiveObservations" />
+                <ScalarProperty Name="behaviorCode" ColumnName="behaviorCode" />
+                <ScalarProperty Name="observationDateTime" ColumnName="observationDateTime" />
+                <ScalarProperty Name="observeeEmployeeId" ColumnName="observeeEmployeeId" />
+                <ScalarProperty Name="observerEmployeeId" ColumnName="observerEmployeeId" />
+                <ScalarProperty Name="userBehaviorId" ColumnName="userBehaviorId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="API_userPoint">
+            <EntityTypeMapping TypeName="AxonifyIntegrationModel.API_userPoint">
+              <MappingFragment StoreEntitySet="API_userPoint">
+                <ScalarProperty Name="Points" ColumnName="Points" />
+                <ScalarProperty Name="employeeId" ColumnName="employeeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="API_UserTimeSpent">
+            <EntityTypeMapping TypeName="AxonifyIntegrationModel.API_UserTimeSpent">
+              <MappingFragment StoreEntitySet="API_UserTimeSpent">
+                <ScalarProperty Name="gamePlayTime" ColumnName="gamePlayTime" />
+                <ScalarProperty Name="extraTrainingModueTime" ColumnName="extraTrainingModueTime" />
+                <ScalarProperty Name="extraQuestionTrainingTime" ColumnName="extraQuestionTrainingTime" />
+                <ScalarProperty Name="refresherTrainingTime" ColumnName="refresherTrainingTime" />
+                <ScalarProperty Name="certificationTrainingTime" ColumnName="certificationTrainingTime" />
+                <ScalarProperty Name="introductoryTrainingTime" ColumnName="introductoryTrainingTime" />
+                <ScalarProperty Name="dailyTrainingTime" ColumnName="dailyTrainingTime" />
+                <ScalarProperty Name="totalTime" ColumnName="totalTime" />
+                <ScalarProperty Name="employeeId" ColumnName="employeeId" />
+                <ScalarProperty Name="userTimeSpentId" ColumnName="userTimeSpentId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

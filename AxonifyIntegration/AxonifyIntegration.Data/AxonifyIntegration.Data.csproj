@@ -51,6 +51,54 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataModels\API_Category.cs">
+      <DependentUpon>AxonifyIntegrationDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModels\API_CertificationCompletion.cs">
+      <DependentUpon>AxonifyIntegrationDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModels\API_Course.cs">
+      <DependentUpon>AxonifyIntegrationDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModels\API_EmployeeBaselineMetric.cs">
+      <DependentUpon>AxonifyIntegrationDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModels\API_EmployeeCurrentMetric.cs">
+      <DependentUpon>AxonifyIntegrationDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModels\API_EmployeeOveralMetric.cs">
+      <DependentUpon>AxonifyIntegrationDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModels\API_EmployeeTopicGraduation.cs">
+      <DependentUpon>AxonifyIntegrationDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModels\API_EmplyeeSubjectCompletion.cs">
+      <DependentUpon>AxonifyIntegrationDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModels\API_KnowledgeMap.cs">
+      <DependentUpon>AxonifyIntegrationDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModels\API_Subject.cs">
+      <DependentUpon>AxonifyIntegrationDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModels\API_Team.cs">
+      <DependentUpon>AxonifyIntegrationDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModels\API_Topic.cs">
+      <DependentUpon>AxonifyIntegrationDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModels\API_User.cs">
+      <DependentUpon>AxonifyIntegrationDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModels\API_UserBehavior.cs">
+      <DependentUpon>AxonifyIntegrationDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModels\API_userPoint.cs">
+      <DependentUpon>AxonifyIntegrationDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModels\API_UserTimeSpent.cs">
+      <DependentUpon>AxonifyIntegrationDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DataModels\AxonifyIntegrationDataModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -65,9 +113,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AxonifyIntegrationDataModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="DataModels\Temp1.cs">
-      <DependentUpon>AxonifyIntegrationDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -5,7 +5,22 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="25546bda729f4978bbc66f62ee669b2a" Name="Diagram1">
-        <EntityTypeShape EntityType="AxonifyIntegrationModel.Temp1" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AxonifyIntegrationModel.API_Category" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="AxonifyIntegrationModel.API_CertificationCompletion" Width="1.5" PointX="3.75" PointY="2.75" />
+        <EntityTypeShape EntityType="AxonifyIntegrationModel.API_Course" Width="1.5" PointX="5.75" PointY="0.75" />
+        <EntityTypeShape EntityType="AxonifyIntegrationModel.API_EmployeeBaselineMetric" Width="1.5" PointX="5.75" PointY="3.75" />
+        <EntityTypeShape EntityType="AxonifyIntegrationModel.API_EmployeeCurrentMetric" Width="1.5" PointX="0.75" PointY="6.75" />
+        <EntityTypeShape EntityType="AxonifyIntegrationModel.API_EmployeeOveralMetric" Width="1.5" PointX="2.75" PointY="6.75" />
+        <EntityTypeShape EntityType="AxonifyIntegrationModel.API_EmployeeTopicGraduation" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="AxonifyIntegrationModel.API_EmplyeeSubjectCompletion" Width="1.5" PointX="7.75" PointY="4.75" />
+        <EntityTypeShape EntityType="AxonifyIntegrationModel.API_KnowledgeMap" Width="1.5" PointX="4.75" PointY="7.75" />
+        <EntityTypeShape EntityType="AxonifyIntegrationModel.API_Subject" Width="1.5" PointX="6.75" PointY="8.75" />
+        <EntityTypeShape EntityType="AxonifyIntegrationModel.API_Team" Width="1.5" PointX="8.75" PointY="8.75" />
+        <EntityTypeShape EntityType="AxonifyIntegrationModel.API_Topic" Width="1.5" PointX="9.75" PointY="0.75" />
+        <EntityTypeShape EntityType="AxonifyIntegrationModel.API_User" Width="1.5" PointX="9.75" PointY="3.75" />
+        <EntityTypeShape EntityType="AxonifyIntegrationModel.API_UserBehavior" Width="1.5" PointX="0.75" PointY="10.75" />
+        <EntityTypeShape EntityType="AxonifyIntegrationModel.API_userPoint" Width="1.5" PointX="10.75" PointY="8.75" />
+        <EntityTypeShape EntityType="AxonifyIntegrationModel.API_UserTimeSpent" Width="1.5" PointX="11.75" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

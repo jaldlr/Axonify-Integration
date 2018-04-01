@@ -12,9 +12,14 @@ namespace AxonifyIntegration.Data.DataModels
     using System;
     using System.Collections.Generic;
     
-    public partial class Temp1
+    public partial class API_EmployeeCurrentMetric
     {
-        public int Id { get; set; }
-        public string name { get; set; }
+        public int currentMetricId { get; set; }
+        public string employeeId { get; set; }
+        public Nullable<int> totalAnswerCount { get; set; }
+        public Nullable<int> correctAnswerCount { get; set; }
+        public Nullable<decimal> percentCorrect { get; set; }
+        public Nullable<int> totalConfidence { get; set; }
+        public Nullable<decimal> averageConfidence { get; set; }
     }
 }
