@@ -8,6 +8,7 @@ using System.Web.Http;
 using AxonifyIntegration.Data.DataModels;
 using AxonifyIntegration.Object.Constants;
 using AxonifyIntegration.WebApi.Utilities;
+using System.ComponentModel.DataAnnotations;
 
 namespace AxonifyIntegration.WebApi.Controllers
 {
@@ -39,11 +40,7 @@ namespace AxonifyIntegration.WebApi.Controllers
             try
             {
                 IEnumerable<API_Subject> subjects = (from s in this._dbContext.API_Subject select s).ToList();
-                var result = new
-                {
-                    subjects = subjects
-                };
-                response = Request.CreateResponse(HttpStatusCode.OK, result);
+                response = Request.CreateResponse(HttpStatusCode.OK, subjects);
             }
             catch(Exception ex)
             {
@@ -61,12 +58,7 @@ namespace AxonifyIntegration.WebApi.Controllers
             try
             {
                 API_Subject subject = (from s in this._dbContext.API_Subject where s.subjectExternalId.Equals(id, StringComparison.OrdinalIgnoreCase) select s).FirstOrDefault();
-
-                var result = new
-                {
-                    subject = subject
-                };
-                response = Request.CreateResponse(HttpStatusCode.OK, result);
+                response = Request.CreateResponse(HttpStatusCode.OK, subject);
             }
             catch (Exception ex)
             {
@@ -77,32 +69,51 @@ namespace AxonifyIntegration.WebApi.Controllers
         }
 
         // POST: api/Subjects
-        public HttpResponseMessage Post(API_Subject value)
+        public HttpResponseMessage Post(List<API_Subject> subjects)
         {
             HttpResponseMessage response;
-
+            Boolean isValid = true;
             try
             {
-                if (value != null && ModelState.IsValid)
+                if (subjects != null)
                 {
-                    API_Subject subject = (from s in this._dbContext.API_Subject where s.subjectExternalId.Equals(value.subjectExternalId, StringComparison.OrdinalIgnoreCase) select s).FirstOrDefault();
-                    if (subject == null)
+                    foreach (API_Subject sb in subjects)
                     {
-                        this._dbContext.API_Subject.Add(value);
+                        ICollection<ValidationResult> results = null;
+                        isValid = Validator.TryValidateObject(sb, new ValidationContext(sb), results, true);
+                        if (isValid)
+                        {
+                            API_Subject subject = (from s in this._dbContext.API_Subject where s.subjectExternalId.Equals(sb.subjectExternalId, StringComparison.OrdinalIgnoreCase) select s).FirstOrDefault();
+                            if (subject == null)
+                            {
+                                this._dbContext.API_Subject.Add(sb);
+                            }
+                            else
+                            {
+                                subject.subjectName = sb.subjectName;
+                                subject.categoryExternalId = sb.categoryExternalId;
+                                subject.revision = sb.revision;
+                            }
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
+
+                    if (isValid)
+                    {
+                        this._dbContext.SaveChanges();
+                        var result = new
+                        {
+                            status = "OK"
+                        };
+                        response = Request.CreateResponse(HttpStatusCode.OK, result);
                     }
                     else
                     {
-                        subject.subjectName = value.subjectName;
-                        subject.categoryExternalId = value.categoryExternalId;
-                        subject.revision = value.revision;
+                        response = HttpStatusCodes.statusCode422;
                     }
-                    this._dbContext.SaveChanges();
-
-                    var result = new
-                    {
-                        status = "OK"
-                    };
-                    response = Request.CreateResponse(HttpStatusCode.OK, result);
                 }
                 else
                 {
@@ -118,16 +129,11 @@ namespace AxonifyIntegration.WebApi.Controllers
         }
 
         // PUT: api/Subjects/5
-        public HttpResponseMessage Put(string id, API_Subject value)
+        public HttpResponseMessage Put(List<API_Subject> subjects)
         {
             try
             {
-                if (value != null)
-                {
-                    value.subjectExternalId = id;
-                }
-
-                return this.Post(value);
+                return this.Post(subjects);
             }
             catch (Exception ex)
             {
