@@ -38,8 +38,6 @@ namespace AxonifyIntegration.WebApi.Controllers
 
             try
             {
-                API_Subject tt = null;
-                tt.ToString();
                 IEnumerable<API_Subject> subjects = (from s in this._dbContext.API_Subject select s).ToList();
                 var result = new
                 {

@@ -51,93 +51,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataModels\API_Category.cs">
-      <DependentUpon>AxonifyIntegrationDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DataModels\API_CertificationCompletion.cs">
-      <DependentUpon>AxonifyIntegrationDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DataModels\API_Course.cs">
-      <DependentUpon>AxonifyIntegrationDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DataModels\API_EmployeeBaselineMetric.cs">
-      <DependentUpon>AxonifyIntegrationDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DataModels\API_EmployeeCurrentMetric.cs">
-      <DependentUpon>AxonifyIntegrationDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DataModels\API_EmployeeOveralMetric.cs">
-      <DependentUpon>AxonifyIntegrationDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DataModels\API_EmployeeTopicGraduation.cs">
-      <DependentUpon>AxonifyIntegrationDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DataModels\API_EmplyeeSubjectCompletion.cs">
-      <DependentUpon>AxonifyIntegrationDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DataModels\API_KnowledgeMap.cs">
-      <DependentUpon>AxonifyIntegrationDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DataModels\API_Subject.cs">
-      <DependentUpon>AxonifyIntegrationDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DataModels\API_Team.cs">
-      <DependentUpon>AxonifyIntegrationDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DataModels\API_Topic.cs">
-      <DependentUpon>AxonifyIntegrationDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DataModels\API_User.cs">
-      <DependentUpon>AxonifyIntegrationDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DataModels\API_UserBehavior.cs">
-      <DependentUpon>AxonifyIntegrationDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DataModels\API_userPoint.cs">
-      <DependentUpon>AxonifyIntegrationDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DataModels\API_UserTimeSpent.cs">
-      <DependentUpon>AxonifyIntegrationDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DataModels\AxonifyIntegrationDataModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>AxonifyIntegrationDataModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DataModels\AxonifyIntegrationDataModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>AxonifyIntegrationDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DataModels\AxonifyIntegrationDataModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>AxonifyIntegrationDataModel.edmx</DependentUpon>
-    </Compile>
+    <Compile Include="DataModels\API_Category.cs" />
+    <Compile Include="DataModels\API_CertificationCompletion.cs" />
+    <Compile Include="DataModels\API_Course.cs" />
+    <Compile Include="DataModels\API_EmployeeBaselineMetric.cs" />
+    <Compile Include="DataModels\API_EmployeeCurrentMetric.cs" />
+    <Compile Include="DataModels\API_EmployeeOveralMetric.cs" />
+    <Compile Include="DataModels\API_EmployeeTopicGraduation.cs" />
+    <Compile Include="DataModels\API_EmplyeeSubjectCompletion.cs" />
+    <Compile Include="DataModels\API_KnowledgeMap.cs" />
+    <Compile Include="DataModels\API_Subject.cs" />
+    <Compile Include="DataModels\API_Team.cs" />
+    <Compile Include="DataModels\API_Topic.cs" />
+    <Compile Include="DataModels\API_User.cs" />
+    <Compile Include="DataModels\API_UserBehavior.cs" />
+    <Compile Include="DataModels\API_userPoint.cs" />
+    <Compile Include="DataModels\API_UserTimeSpent.cs" />
+    <Compile Include="DataModels\AxonifyIntegrationEntities.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="DataModels\AxonifyIntegrationDataModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>AxonifyIntegrationDataModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
     <None Include="App.Config" />
-    <None Include="DataModels\AxonifyIntegrationDataModel.edmx.diagram">
-      <DependentUpon>AxonifyIntegrationDataModel.edmx</DependentUpon>
-    </None>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="DataModels\AxonifyIntegrationDataModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>AxonifyIntegrationDataModel.edmx</DependentUpon>
-      <LastGenOutput>AxonifyIntegrationDataModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="DataModels\AxonifyIntegrationDataModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>AxonifyIntegrationDataModel.edmx</DependentUpon>
-      <LastGenOutput>AxonifyIntegrationDataModel.cs</LastGenOutput>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
