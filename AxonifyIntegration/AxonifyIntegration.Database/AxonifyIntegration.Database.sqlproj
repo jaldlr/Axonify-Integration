@@ -73,11 +73,12 @@
     <Build Include="Tables\API_EmployeeBaselineMetric.sql" />
     <Build Include="Tables\API_EmployeeCurrentMetric.sql" />
     <Build Include="Tables\API_EmployeeOveralMetric.sql" />
-    <Build Include="Tables\API_userPoint.sql" />
+    <Build Include="Tables\API_UserPoint.sql" />
     <Build Include="Tables\API_UserTimeSpent.sql" />
     <Build Include="Tables\API_User.sql" />
     <Build Include="Tables\API_Team.sql" />
     <Build Include="Tables\API_UserBehavior.sql" />
+    <Build Include="Tables\API_UserAreasOfInterest.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="AxonifyIntegration.Database.publish.xml" />

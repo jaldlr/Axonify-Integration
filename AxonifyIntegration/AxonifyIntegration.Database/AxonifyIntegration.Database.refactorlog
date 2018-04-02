@@ -224,4 +224,39 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="userBehaviorId" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="b38b347a-589a-4a59-9e9d-a2b6a467c1f9" ChangeDateTime="04/02/2018 16:12:41">
+    <Property Name="ElementName" Value="[dbo].[API_User].[Email]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[API_User]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="email" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="5d9e4099-13fb-4951-9369-8e632f366131" ChangeDateTime="04/02/2018 16:15:34">
+    <Property Name="ElementName" Value="[dbo].[API_User].[userTypeId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[API_User]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="userType" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="8d95ede4-0b9f-4bd1-b9f9-da6478de4e34" ChangeDateTime="04/02/2018 16:16:43">
+    <Property Name="ElementName" Value="[dbo].[API_User].[Username]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[API_User]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="userName" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="79250961-283a-45ce-bbb6-df16d10a6376" ChangeDateTime="04/02/2018 16:17:12">
+    <Property Name="ElementName" Value="[dbo].[API_User].[languageId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[API_User]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="language" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="f3863c91-42dd-41ed-991f-aa9ae8dfe0d7" ChangeDateTime="04/02/2018 16:24:08">
+    <Property Name="ElementName" Value="[dbo].[API_UserAreasOfInterest].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[API_UserAreasOfInterest]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="employeeId" />
+  </Operation>
 </Operations>

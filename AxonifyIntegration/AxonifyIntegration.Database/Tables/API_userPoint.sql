@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[API_userPoint]
+﻿CREATE TABLE [dbo].[API_UserPoint]
 (
 	[employeeId] NVARCHAR(255) NOT NULL PRIMARY KEY, 
     [Points] INT NULL

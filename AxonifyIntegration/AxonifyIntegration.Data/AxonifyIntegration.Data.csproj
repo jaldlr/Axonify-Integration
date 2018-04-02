@@ -38,6 +38,10 @@
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -51,27 +55,83 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataModels\API_Category.cs" />
-    <Compile Include="DataModels\API_CertificationCompletion.cs" />
-    <Compile Include="DataModels\API_Course.cs" />
-    <Compile Include="DataModels\API_EmployeeBaselineMetric.cs" />
-    <Compile Include="DataModels\API_EmployeeCurrentMetric.cs" />
-    <Compile Include="DataModels\API_EmployeeOveralMetric.cs" />
-    <Compile Include="DataModels\API_EmployeeTopicGraduation.cs" />
-    <Compile Include="DataModels\API_EmplyeeSubjectCompletion.cs" />
-    <Compile Include="DataModels\API_KnowledgeMap.cs" />
-    <Compile Include="DataModels\API_Subject.cs" />
-    <Compile Include="DataModels\API_Team.cs" />
-    <Compile Include="DataModels\API_Topic.cs" />
-    <Compile Include="DataModels\API_User.cs" />
-    <Compile Include="DataModels\API_UserBehavior.cs" />
-    <Compile Include="DataModels\API_userPoint.cs" />
-    <Compile Include="DataModels\API_UserTimeSpent.cs" />
-    <Compile Include="DataModels\AxonifyIntegrationEntities.cs" />
+    <Compile Include="DataModels\API_Category.cs">
+      <DependentUpon>AxonifyIntegrationEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModels\API_CertificationCompletion.cs">
+      <DependentUpon>AxonifyIntegrationEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModels\API_Course.cs">
+      <DependentUpon>AxonifyIntegrationEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModels\API_EmployeeBaselineMetric.cs">
+      <DependentUpon>AxonifyIntegrationEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModels\API_EmployeeCurrentMetric.cs">
+      <DependentUpon>AxonifyIntegrationEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModels\API_EmployeeOveralMetric.cs">
+      <DependentUpon>AxonifyIntegrationEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModels\API_EmployeeTopicGraduation.cs">
+      <DependentUpon>AxonifyIntegrationEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModels\API_EmplyeeSubjectCompletion.cs">
+      <DependentUpon>AxonifyIntegrationEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModels\API_KnowledgeMap.cs">
+      <DependentUpon>AxonifyIntegrationEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModels\API_Subject.cs">
+      <DependentUpon>AxonifyIntegrationEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModels\API_Team.cs">
+      <DependentUpon>AxonifyIntegrationEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModels\API_Topic.cs">
+      <DependentUpon>AxonifyIntegrationEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModels\API_User.cs">
+      <DependentUpon>AxonifyIntegrationEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModels\API_UserAreasOfInterest.cs">
+      <DependentUpon>AxonifyIntegrationEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModels\API_UserBehavior.cs">
+      <DependentUpon>AxonifyIntegrationEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModels\API_UserPoint.cs">
+      <DependentUpon>AxonifyIntegrationEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModels\API_UserTimeSpent.cs">
+      <DependentUpon>AxonifyIntegrationEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModels\AxonifyIntegrationEntities.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AxonifyIntegrationEntities.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModels\AxonifyIntegrationEntities.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AxonifyIntegrationEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModels\AxonifyIntegrationEntities.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AxonifyIntegrationEntities.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
+    <EntityDeploy Include="DataModels\AxonifyIntegrationEntities.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>AxonifyIntegrationEntities.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="DataModels\AxonifyIntegrationEntities.edmx.diagram">
+      <DependentUpon>AxonifyIntegrationEntities.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -82,6 +142,18 @@
       <Project>{9216c2bc-0053-4e4d-8f18-3c806f81c7b0}</Project>
       <Name>AxonifyIntegration.Object</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DataModels\AxonifyIntegrationEntities.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AxonifyIntegrationEntities.edmx</DependentUpon>
+      <LastGenOutput>AxonifyIntegrationEntities.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="DataModels\AxonifyIntegrationEntities.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AxonifyIntegrationEntities.edmx</DependentUpon>
+      <LastGenOutput>AxonifyIntegrationEntities.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
