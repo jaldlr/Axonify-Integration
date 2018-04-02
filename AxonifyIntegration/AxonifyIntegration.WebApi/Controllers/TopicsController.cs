@@ -34,6 +34,7 @@ namespace AxonifyIntegration.WebApi.Controllers
         #region Api Methods
 
         // GET: api/Topics
+        [HttpGet]
         public HttpResponseMessage Get()
         {
             HttpResponseMessage response;
@@ -52,6 +53,7 @@ namespace AxonifyIntegration.WebApi.Controllers
         }
 
         // GET: api/Topics/5
+        [HttpGet]
         public HttpResponseMessage Get(string id)
         {
             HttpResponseMessage response;
@@ -70,6 +72,7 @@ namespace AxonifyIntegration.WebApi.Controllers
         }
 
         // POST: api/Topics
+        [HttpPost]
         public HttpResponseMessage Post(List<API_Topic> topics)
         {
             HttpResponseMessage response;
@@ -129,6 +132,7 @@ namespace AxonifyIntegration.WebApi.Controllers
         }
 
         // PUT: api/Topics
+        [HttpPut]
         public HttpResponseMessage Put(List<API_Topic> topics)
         {
             try

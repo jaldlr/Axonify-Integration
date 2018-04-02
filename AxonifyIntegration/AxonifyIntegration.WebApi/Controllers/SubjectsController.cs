@@ -32,7 +32,9 @@ namespace AxonifyIntegration.WebApi.Controllers
         #endregion
 
         #region Api Methods
+
         // GET: api/Subjects
+        [HttpGet]
         public HttpResponseMessage Get()
         {
             HttpResponseMessage response;
@@ -51,6 +53,7 @@ namespace AxonifyIntegration.WebApi.Controllers
         }
 
         // GET: api/Subjects/5
+        [HttpGet]
         public HttpResponseMessage Get(string id)
         {
             HttpResponseMessage response;
@@ -69,6 +72,7 @@ namespace AxonifyIntegration.WebApi.Controllers
         }
 
         // POST: api/Subjects
+        [HttpPost]
         public HttpResponseMessage Post(List<API_Subject> subjects)
         {
             HttpResponseMessage response;
@@ -129,6 +133,7 @@ namespace AxonifyIntegration.WebApi.Controllers
         }
 
         // PUT: api/Subjects/5
+        [HttpPut]
         public HttpResponseMessage Put(List<API_Subject> subjects)
         {
             try
