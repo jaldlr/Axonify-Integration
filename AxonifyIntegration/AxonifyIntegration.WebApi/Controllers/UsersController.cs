@@ -33,9 +33,32 @@ namespace AxonifyIntegration.WebApi.Controllers
 
         #region Api Methods
 
+        // GET: Users
+        [HttpGet]
+        public HttpResponseMessage Get()
+        {
+            HttpResponseMessage response;
+
+            try
+            {
+                IEnumerable<API_User> items = (from s in this._dbContext.API_User select s).ToList();
+                foreach(API_User item in items)
+                {
+                    item.areasOfInterest = (from t in item.API_UserAreasOfInterest select t.areaOfInterest).ToList();
+                }
+                response = Request.CreateResponse(HttpStatusCode.OK, items);
+            }
+            catch (Exception ex)
+            {
+                response = HttpStatusCodes.statusCode500;
+            }
+
+            return response;
+        }
+
         // Put: Users
-        [HttpPost]
-        public HttpResponseMessage Post([FromBody] List<API_User> users)
+        [HttpPut]
+        public HttpResponseMessage Put(List<API_User> users)
         {
             HttpResponseMessage response;
             Boolean isValid = true;
