@@ -144,7 +144,7 @@ namespace AxonifyIntegration.WebApi.Controllers
 
         [HttpGet]
         [Route("users/{employee_id}/aois")]
-        public HttpResponseMessage GetAreasOfInteres(string employee_id)
+        public HttpResponseMessage GetAreasOfInterest(string employee_id)
         {
             HttpResponseMessage response;
 
@@ -172,7 +172,7 @@ namespace AxonifyIntegration.WebApi.Controllers
 
         [HttpPut]
         [Route("users/{employee_id}/aois/{aoi_to_add}")]
-        public HttpResponseMessage AddAreaOfInteres(string employee_id, string aoi_to_add)
+        public HttpResponseMessage AddAreaOfInterest(string employee_id, string aoi_to_add)
         {
             HttpResponseMessage response;
 
@@ -206,7 +206,7 @@ namespace AxonifyIntegration.WebApi.Controllers
 
         [HttpDelete]
         [Route("users/{employee_id}/aois/{aoi_to_delete}")]
-        public HttpResponseMessage RemoveAreaOfInteres(string employee_id, string aoi_to_delete)
+        public HttpResponseMessage RemoveAreaOfInterest(string employee_id, string aoi_to_delete)
         {
             HttpResponseMessage response;
 
