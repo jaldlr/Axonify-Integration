@@ -16,14 +16,8 @@ namespace AxonifyIntegration.App
     {
         static void Main(string[] args)
         {
-            UsersRepository usersRepository = new UsersRepository();
             UsersApiClient usersApiClient = new UsersApiClient();
-
-            List<UsersMod> users = usersRepository.GetPendingUserToSendToAxonify();
-            usersApiClient.AddUsers(new UsersRequestcs()
-            {
-                users = users
-            });
+            usersApiClient.SendPendingUsers();
         }
     }
 }

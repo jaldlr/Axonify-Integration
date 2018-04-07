@@ -15,23 +15,36 @@ using AxonifyIntegration.Models.Constants;
 
 namespace AxonifyIntegration.Dal.ApiClient
 {
+    /// <summary>
+    /// Class to execute Axonify Api Requests
+    /// </summary>
     public class AxonifyApiClient
     {
-        public static GeneralResult CallApi(string apiFullUrl, string method, string accept, string contentType, string jsonParameters)
+        /// <summary>
+        /// Call an Axonify Api
+        /// </summary>
+        /// <param name="apiFullUrl"></param>
+        /// <param name="method"></param>
+        /// <param name="jsonParameters"></param>
+        /// <returns></returns>
+        public static GeneralResult CallApi(string apiFullUrl, string method, string jsonParameters)
         {
             GeneralResult result = new GeneralResult();
             var http = (HttpWebRequest)WebRequest.Create(new Uri(apiFullUrl));
-            http.Accept = accept;
-            http.ContentType = contentType;
+            http.Accept = "application/json";
+            http.ContentType = "application/json; charset=utf-8";
             http.Method = method;
             http.Headers.Add(ConfigurationManager.AppSettings[AppSettings.ApiHeaderTokenName], ConfigurationManager.AppSettings[AppSettings.ApiToken]);
-            
-            ASCIIEncoding encoding = new ASCIIEncoding();
-            Byte[] bytes = encoding.GetBytes(jsonParameters);
 
-            Stream newStream = http.GetRequestStream();
-            newStream.Write(bytes, 0, bytes.Length);
-            newStream.Close();
+            if (!string.IsNullOrEmpty(jsonParameters))
+            {
+                UTF8Encoding encoding = new UTF8Encoding();
+                Byte[] bytes = encoding.GetBytes(jsonParameters);
+
+                Stream newStream = http.GetRequestStream();
+                newStream.Write(bytes, 0, bytes.Length);
+                newStream.Close();
+            }
 
             var response = http.GetResponse();
 

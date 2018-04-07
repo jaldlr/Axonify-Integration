@@ -49,6 +49,7 @@
     <Compile Include="ApiClient\AxonifyApiClient.cs" />
     <Compile Include="ApiClient\UsersApiClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\InterfacesRepository.cs" />
     <Compile Include="Repositories\UsersRepository.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -24,6 +24,12 @@ namespace AxonifyIntegration.Models.Api
         public string team { set; get; }
         public string lineOfBusiness { set; get; }
         public string[] areasOfInterest { set; get; }
+        public string[] areasOfInterests { set; get; }
         public Boolean suspended { set; get; }
+
+        public UsersMod()
+        {
+            this.areasOfInterest = new string[] { };
+        }
     }
 }

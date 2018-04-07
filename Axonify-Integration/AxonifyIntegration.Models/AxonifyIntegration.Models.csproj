@@ -40,10 +40,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Api\Requests\UsersRequestcs.cs" />
+    <Compile Include="Api\Requests\UsersRequest.cs" />
     <Compile Include="Api\Results\GeneralResult.cs" />
+    <Compile Include="Api\UserAreasOfInterest.cs" />
     <Compile Include="Api\UsersMod.cs" />
-    <Compile Include="Constants\AppSettings.cs" />
+    <Compile Include="Constants\Constants.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

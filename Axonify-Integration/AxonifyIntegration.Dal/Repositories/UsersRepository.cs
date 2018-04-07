@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data;
 
 using AxonifyIntegration.Dal.AdoDB;
 using AxonifyIntegration.Models.Api;
@@ -24,36 +25,35 @@ namespace AxonifyIntegration.Dal.Repositories
         /// <returns>List<UsersMod></returns>
         public List<UsersMod> GetPendingUserToSendToAxonify()
         {
-            List<UsersMod> items = new List<UsersMod>();
+            List<UsersMod> users = new List<UsersMod>();
 
             using(AdoHelper db = new AdoHelper(this._connectionString))
             {
                 db.Connect();
 
-                items.Add(new UsersMod()
+                DataSet ds = db.ExecDataSetProc("axf_usp_InterfaceGetPendingUsers");
+
+                if(ds.Tables.Count > 0)
                 {
-                    employeeId = "28",
-                    active = true,
-                    fullName = "Bob Smith",
-                    nickName = "Bobby",
-                    username = "bsmith",
-                    md5Password = "asd",
-                    userType = "ADMIN",
-                    email = "myemail@xyzcorp.com",
-                    language = "EN",
-                    hireDate = "20151123",
-                    jobTitle = "Shipper Receiver",
-                    department = "Shipping",
-                    team = "DC - 1234",
-                    lineOfBusiness = "Pharma",
-                    areasOfInterest = new string[] { "Safety", "Leadership" },
-                    suspended = false
-                });
+                    users = ds.Tables[0].ToList<UsersMod>();
+                }
+
+                if (ds.Tables.Count > 0)
+                {
+                    List<UserAreasOfInterest> areas = ds.Tables[1].ToList<UserAreasOfInterest>();
+                    foreach(UsersMod user in users)
+                    {
+                        user.areasOfInterest = (
+                            from a in areas where a.employeeId == user.employeeId
+                            select a.areaOfInterest
+                        ).ToArray();
+                    }
+                }
 
                 db.Dispose();
             }
 
-            return items;
+            return users;
         }
     }
 }

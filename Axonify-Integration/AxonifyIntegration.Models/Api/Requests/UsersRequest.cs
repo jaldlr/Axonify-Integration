@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace AxonifyIntegration.Models.Api.Requests
 {
-    public class UsersRequestcs
+    public class UsersRequest
     {
         public List<UsersMod> users { set; get; }
 
-        public UsersRequestcs()
+        public UsersRequest()
         {
             this.users = new List<UsersMod>();
         }
