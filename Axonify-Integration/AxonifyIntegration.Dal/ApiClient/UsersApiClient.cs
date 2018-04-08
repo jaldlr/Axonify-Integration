@@ -25,21 +25,26 @@ namespace AxonifyIntegration.Dal.ApiClient
         public GeneralResult SendPendingUsers()
         {
             InterfacesRepository.InterfaceHistoryUpdate(InterfacesActions.NEWRECORD, InterfacesNames.AxonifyUsers);
+            Console.WriteLine("----Execution Interface: " + InterfacesNames.AxonifyUsers);
             GeneralResult result = new GeneralResult();
 
             try
             {
+                Console.WriteLine("--------Getting users from BOS system");
                 UsersRepository repoUsers = new UsersRepository();
                 UsersRequest users = new UsersRequest()
                 {
                     users = repoUsers.GetPendingUserToSendToAxonify()
                 };
+                Console.WriteLine("--------Users to update " + users.users.Count);
 
-                if (users != null && users.users != null && users.users.Count > 0)
+                if (users.users.Count > 0)
                 {
                     string baseUrl = ConfigurationManager.AppSettings[AppSettings.ApiUrlBase];
                     string fullApiUsers = baseUrl + "users";
                     string jsonParameters = JsonConvert.SerializeObject(users);
+
+                    Console.WriteLine("--------Sending users to Axonify");
                     GeneralResult resultCall = AxonifyApiClient.CallApi(fullApiUsers, HttpMethos.PUT, jsonParameters);
 
                     if (!string.IsNullOrEmpty(resultCall.content) && resultCall.content.ToLower().Contains("\"status\""))
@@ -49,6 +54,7 @@ namespace AxonifyIntegration.Dal.ApiClient
                     }
 
                     //Remove Areas Of Interest that are not included in BOS system for ACTIVE users
+                    Console.WriteLine("--------Removing from Axonify areas of interes that does not are included of each user in BOS system");
                     if (result.status.Equals(ApiStatusResponse.OK, StringComparison.OrdinalIgnoreCase) && users.users != null)
                     {
                         var activeUsers = (from u in users.users where u.active == true select u).ToList();
@@ -56,12 +62,14 @@ namespace AxonifyIntegration.Dal.ApiClient
                         {
                             string fullApiAreasOfInterest = baseUrl + "users/" + user.employeeId + "/aois";
                             GeneralResult resultCallAOS = AxonifyApiClient.CallApi(fullApiAreasOfInterest, HttpMethos.GET, string.Empty);
+                            Console.WriteLine("------------Getting current areas of interst of user " + user.fullName + " (" + user.employeeId.ToString() + ")");
                             if (resultCallAOS.status.Equals(ApiStatusResponse.OK, StringComparison.OrdinalIgnoreCase))
                             {
                                 UsersMod temporalUser = JsonConvert.DeserializeObject<UsersMod>(resultCallAOS.content);
                                 string[] currentAxonifyAreas = (temporalUser != null && temporalUser.areasOfInterests != null) ? temporalUser.areasOfInterests : new string[] { };
                                 var areasToDelete = currentAxonifyAreas.Except(user.areasOfInterest);
 
+                                Console.WriteLine("------------Removing areas of interest");
                                 foreach (var areaOfInterest in areasToDelete)
                                 {
                                     string fullApiDeleteAreaOfInterest = baseUrl + "users/" + user.employeeId + "/aois/" + areaOfInterest;
@@ -76,11 +84,17 @@ namespace AxonifyIntegration.Dal.ApiClient
                 }
 
                 InterfacesRepository.InterfaceHistoryUpdate(InterfacesActions.SUCCESSPROCESS, InterfacesNames.AxonifyUsers);
+                Console.WriteLine("--------SUCCESS Process");
             }
             catch(Exception ex)
             {
                 InterfacesRepository.InterfaceHistoryUpdate(InterfacesActions.FAILPROCESS, InterfacesNames.AxonifyUsers, ex.Message);
+                Console.WriteLine("--------FAIL Process");
+                Console.WriteLine("--------Error: " + ex.Message);
             }
+
+
+            Console.WriteLine("----End Interface: " + InterfacesNames.AxonifyUsers);
 
             return result;
         }
