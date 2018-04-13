@@ -9,6 +9,7 @@ using AxonifyIntegration.Models.Api.Requests;
 using AxonifyIntegration.Models.Api.Results;
 using AxonifyIntegration.Dal.Repositories;
 using AxonifyIntegration.Dal.ApiClient;
+using AxonifyIntegration.Models.Constants;
 
 namespace AxonifyIntegration.App
 {
@@ -16,8 +17,19 @@ namespace AxonifyIntegration.App
     {
         static void Main(string[] args)
         {
-            UsersApiClient usersApiClient = new UsersApiClient();
-            usersApiClient.SendPendingUsers();
+            if(args != null)
+            {
+                UsersApiClient usersApiClient = new UsersApiClient();
+                switch (args[0].ToString())
+                {
+                    case "AxonifyUsers":
+                        usersApiClient.SendPendingUsers();
+                        break;
+                    case "TopicGraduations":
+                        usersApiClient.GetTopicGraduations();
+                        break;
+                }                
+            }
         }
     }
 }

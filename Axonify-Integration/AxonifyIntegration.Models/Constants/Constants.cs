@@ -30,6 +30,7 @@ namespace AxonifyIntegration.Models.Constants
     public class InterfacesNames
     {
         public static string AxonifyUsers = "AxonifyUsers";
+        public static string TopicGraduations = "TopicGraduations";
     }
 
     public class InterfacesActions

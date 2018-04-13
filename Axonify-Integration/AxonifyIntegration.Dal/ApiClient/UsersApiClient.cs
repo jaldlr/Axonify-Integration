@@ -19,10 +19,9 @@ namespace AxonifyIntegration.Dal.ApiClient
     public class UsersApiClient
     {
         /// <summary>
-        /// Call an Axonify api tu create or update users
+        /// Call an Axonify api to create or update users in Axonify
         /// </summary>
-        /// <returns></returns>
-        public GeneralResult SendPendingUsers()
+        public void SendPendingUsers()
         {
             InterfacesRepository.InterfaceHistoryUpdate(InterfacesActions.NEWRECORD, InterfacesNames.AxonifyUsers);
             Console.WriteLine("----Execution Interface: " + InterfacesNames.AxonifyUsers);
@@ -95,8 +94,67 @@ namespace AxonifyIntegration.Dal.ApiClient
 
 
             Console.WriteLine("----End Interface: " + InterfacesNames.AxonifyUsers);
+        }
 
-            return result;
+        /// <summary>
+        /// Call an Axonify api to get all topic graduations from current date, and register them into BOS system
+        /// </summary>
+        public void GetTopicGraduations()
+        {
+            InterfacesRepository.InterfaceHistoryUpdate(InterfacesActions.NEWRECORD, InterfacesNames.TopicGraduations);
+            Console.WriteLine("----Execution Interface: " + InterfacesNames.TopicGraduations);
+            TopicGraduationsResult topicGraduationsResult = new TopicGraduationsResult();
+            List<TopicGraduation> topicGraduations = new List<TopicGraduation>();
+
+            try
+            {
+                string timePeriod = "DAY";
+                string timePeriodDate = DateTime.Now.ToString("yyyyMMdd");
+                string baseUrl = ConfigurationManager.AppSettings[AppSettings.ApiUrlBase];
+                string fullApiUsers = baseUrl + "users/topicGraduations?timePeriod=" + timePeriod + "&timePeriodDate=" + timePeriodDate + "&page=";
+                int page = 0;
+
+                do
+                {
+                    Console.WriteLine("--------Getting topics graduations for [timePeriod = " + timePeriod + "; timePeriodDate = " + timePeriodDate + "; page = " + page.ToString() + ";]");
+                    GeneralResult resultCall = AxonifyApiClient.CallApi(fullApiUsers + page.ToString(), HttpMethos.GET, string.Empty);
+                    topicGraduationsResult = new TopicGraduationsResult();
+
+                    Console.WriteLine("-------------HttpStatusCode = " + resultCall.statusCode.ToString());
+                    if (resultCall.statusCode == HttpStatusCode.OK)
+                    {
+                        topicGraduationsResult = JsonConvert.DeserializeObject<TopicGraduationsResult>(resultCall.content);
+                        topicGraduations.AddRange(topicGraduationsResult.topicGraduations);
+                    }else
+                    {
+                        topicGraduationsResult.hasMore = false;
+                    }
+                    ++page;
+                } while (topicGraduationsResult != null && topicGraduationsResult.hasMore);
+
+                if (topicGraduations.Count > 0)
+                {
+                    Console.WriteLine("--------Updating in BOS system topic graduations for " + topicGraduations.Count.ToString() + " users");
+                    UsersRepository repository = new UsersRepository();
+                    repository.UpdateTopicGraduations(topicGraduations);
+                }
+                else
+                {
+                    Console.WriteLine("--------No topic graduations to be updated");
+                }
+
+                InterfacesRepository.InterfaceHistoryUpdate(InterfacesActions.SUCCESSPROCESS, InterfacesNames.TopicGraduations);
+                Console.WriteLine("--------SUCCESS Process");
+            }
+            catch (Exception ex)
+            {
+                InterfacesRepository.InterfaceHistoryUpdate(InterfacesActions.FAILPROCESS, InterfacesNames.TopicGraduations, ex.Message);
+                Console.WriteLine("--------FAIL Process");
+                Console.WriteLine("--------Error: " + ex.Message);
+            }
+
+
+            Console.WriteLine("----End Interface: " + InterfacesNames.TopicGraduations);
         }
     }
 }

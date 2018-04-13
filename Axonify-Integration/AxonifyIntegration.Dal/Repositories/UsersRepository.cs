@@ -7,6 +7,7 @@ using System.Data;
 
 using AxonifyIntegration.Dal.AdoDB;
 using AxonifyIntegration.Models.Api;
+using AxonifyIntegration.Models.Helpers;
 using AxonifyIntegration.Models.Constants;
 
 namespace AxonifyIntegration.Dal.Repositories
@@ -36,6 +37,13 @@ namespace AxonifyIntegration.Dal.Repositories
                 if(ds.Tables.Count > 0)
                 {
                     users = ds.Tables[0].ToList<UsersMod>();
+                    foreach (var user in users)
+                    {
+                        if (string.IsNullOrEmpty(user.md5Password))
+                        {
+                            user.md5Password = null;
+                        }
+                    }
                 }
 
                 if (ds.Tables.Count > 0)
@@ -54,6 +62,25 @@ namespace AxonifyIntegration.Dal.Repositories
             }
 
             return users;
+        }
+
+        /// <summary>
+        /// Update all topic graduations obtained by axonify into BOS system
+        /// </summary>
+        public void UpdateTopicGraduations(List<TopicGraduation> topics)
+        {
+            List<UsersMod> users = new List<UsersMod>();
+
+            using (AdoHelper db = new AdoHelper(this._connectionString))
+            {
+                db.Connect();
+
+                DataSet ds = db.ExecDataSetProc("axf_usp_InterfaceUpdateTopicGraduations",
+                    "@TopicGraduationsXML", StringHelper.ObjectToXML(topics)
+                );
+
+                db.Dispose();
+            }
         }
     }
 }
