@@ -23,13 +23,17 @@ namespace AxonifyIntegration.Models.Api
         public string department { set; get; }
         public string team { set; get; }
         public string lineOfBusiness { set; get; }
-        public string[] areasOfInterest { set; get; }
+        public string AOI { set; get; }
+        public string areasOfInterest { set; get; }
+        public string quizId { get; set; }
+        public string brandId { get; set; }
+        public string brandName { get; set; }
         public string[] areasOfInterests { set; get; }
         public Boolean suspended { set; get; }
 
         public UsersMod()
         {
-            this.areasOfInterest = new string[] { };
+            //this.areasOfInterest = new string[] { };
         }
     }
 }

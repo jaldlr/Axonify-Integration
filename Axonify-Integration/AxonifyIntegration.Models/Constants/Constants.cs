@@ -31,6 +31,7 @@ namespace AxonifyIntegration.Models.Constants
     {
         public static string AxonifyUsers = "AxonifyUsers";
         public static string TopicGraduations = "TopicGraduations";
+        public static string AddAoi = "AddAreaOfInterest";
     }
 
     public class InterfacesActions

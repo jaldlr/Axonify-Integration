@@ -51,32 +51,64 @@ namespace AxonifyIntegration.Dal.ApiClient
                         result = JsonConvert.DeserializeObject<GeneralResult>(resultCall.content);
                         result.content = resultCall.content;
                     }
-
-                    //Remove Areas Of Interest that are not included in BOS system for ACTIVE users
-                    Console.WriteLine("--------Removing from Axonify areas of interes that does not are included of each user in BOS system");
-                    if (result.status.Equals(ApiStatusResponse.OK, StringComparison.OrdinalIgnoreCase) && users.users != null)
+                    //https://<tenant>.axonify.com/axonify/api/v2/topics
+                    string createsubjectUrl = baseUrl + "subjects";
+                    SubjectRequest subjects = new SubjectRequest();
+                    TopicRequest topics = new TopicRequest();
+                    foreach (var u in users.users)
                     {
-                        var activeUsers = (from u in users.users where u.active == true select u).ToList();
-                        foreach (UsersMod user in activeUsers)
+                        var sub = new Subject
                         {
-                            string fullApiAreasOfInterest = baseUrl + "users/" + user.employeeId + "/aois";
-                            GeneralResult resultCallAOS = AxonifyApiClient.CallApi(fullApiAreasOfInterest, HttpMethos.GET, string.Empty);
-                            Console.WriteLine("------------Getting current areas of interst of user " + user.fullName + " (" + user.employeeId.ToString() + ")");
-                            if (resultCallAOS.status.Equals(ApiStatusResponse.OK, StringComparison.OrdinalIgnoreCase))
-                            {
-                                UsersMod temporalUser = JsonConvert.DeserializeObject<UsersMod>(resultCallAOS.content);
-                                string[] currentAxonifyAreas = (temporalUser != null && temporalUser.areasOfInterests != null) ? temporalUser.areasOfInterests : new string[] { };
-                                var areasToDelete = currentAxonifyAreas.Except(user.areasOfInterest);
+                            categoryExternalId = "brand01",
+                            subjectExternalId = u.brandId,
+                            subjectName = u.brandName,
+                            revision = DateTime.Now.ToString()
+                        };
+                        subjects.subjects.Add(sub);
 
-                                Console.WriteLine("------------Removing areas of interest");
-                                foreach (var areaOfInterest in areasToDelete)
-                                {
-                                    string fullApiDeleteAreaOfInterest = baseUrl + "users/" + user.employeeId + "/aois/" + areaOfInterest;
-                                    AxonifyApiClient.CallApi(fullApiDeleteAreaOfInterest, HttpMethos.DELETE, string.Empty);
-                                }
-                            }
-                        }
+                        var top = new Topic
+                        {
+                            subjectExternalId = u.brandId,
+                            topicExternalId = u.quizId,
+                            topicName = u.areasOfInterest,
+                            revision = DateTime.Now.ToString()
+                        };
+                        topics.topics.Add(top);
                     }
+                    jsonParameters = string.Empty;
+                    jsonParameters = JsonConvert.SerializeObject(subjects);
+                    resultCall = AxonifyApiClient.CallApi(createsubjectUrl, HttpMethos.PUT, jsonParameters);
+
+
+                    string createtopicUrl = baseUrl + "topics";
+                    jsonParameters = string.Empty;
+                    jsonParameters = JsonConvert.SerializeObject(topics);
+                    resultCall = AxonifyApiClient.CallApi(createtopicUrl, HttpMethos.PUT, jsonParameters);
+                    //Remove Areas Of Interest that are not included in BOS system for ACTIVE users
+                    //Console.WriteLine("--------Removing from Axonify areas of interes that are not included of each user in BOS system");
+                    //if (result.status.Equals(ApiStatusResponse.OK, StringComparison.OrdinalIgnoreCase) && users.users != null)
+                    //    {
+                    //        var activeUsers = (from u in users.users where u.active == true select u).ToList();
+                    //        foreach (UsersMod user in activeUsers)
+                    //        {
+                    //            string fullApiAreasOfInterest = baseUrl + "users/" + user.employeeId + "/aois";
+                    //            GeneralResult resultCallAOS = AxonifyApiClient.CallApi(fullApiAreasOfInterest, HttpMethos.GET, string.Empty);
+                    //            Console.WriteLine("------------Getting current areas of interst of user " + user.fullName + " (" + user.employeeId.ToString() + ")");
+                    //            if (resultCallAOS.status.Equals(ApiStatusResponse.OK, StringComparison.OrdinalIgnoreCase))
+                    //            {
+                    //                UsersMod temporalUser = JsonConvert.DeserializeObject<UsersMod>(resultCallAOS.content);
+                    //                string[] currentAxonifyAreas = (temporalUser != null && temporalUser.areasOfInterests != null) ? temporalUser.areasOfInterests : new string[] { };
+                    //                var areasToDelete = currentAxonifyAreas.Except(user.areasOfInterest);
+
+                    //                Console.WriteLine("------------Removing areas of interest");
+                    //                foreach (var areaOfInterest in areasToDelete)
+                    //                {
+                    //                    string fullApiDeleteAreaOfInterest = baseUrl + "users/" + user.employeeId + "/aois/" + areaOfInterest;
+                    //                    AxonifyApiClient.CallApi(fullApiDeleteAreaOfInterest, HttpMethos.DELETE, string.Empty);
+                    //                }
+                    //            }
+                    //        }
+                    //    }
 
                     result.statusCode = resultCall.statusCode;
                     result.statusDescription = resultCall.statusDescription;

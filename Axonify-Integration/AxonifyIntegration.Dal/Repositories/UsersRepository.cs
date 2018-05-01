@@ -46,17 +46,18 @@ namespace AxonifyIntegration.Dal.Repositories
                     }
                 }
 
-                if (ds.Tables.Count > 0)
-                {
-                    List<UserAreasOfInterest> areas = ds.Tables[1].ToList<UserAreasOfInterest>();
-                    foreach(UsersMod user in users)
-                    {
-                        user.areasOfInterest = (
-                            from a in areas where a.employeeId == user.employeeId
-                            select a.areaOfInterest
-                        ).ToArray();
-                    }
-                }
+                //no needed anymore
+                //if (ds.Tables.Count > 0)
+                //{
+                //    List<UserAreasOfInterest> areas = ds.Tables[1].ToList<UserAreasOfInterest>();
+                //    foreach(UsersMod user in users)
+                //    {
+                //        user.areasOfInterest = (
+                //            from a in areas where a.employeeId == user.employeeId
+                //            select a.areaOfInterest
+                //        ).ToArray();
+                //    }
+                //}
 
                 db.Dispose();
             }
