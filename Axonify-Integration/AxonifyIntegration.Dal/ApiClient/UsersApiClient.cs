@@ -35,55 +35,74 @@ namespace AxonifyIntegration.Dal.ApiClient
                 {
                     users = repoUsers.GetPendingUserToSendToAxonify()
                 };
-                Console.WriteLine("--------Users to update " + users.users.Count);
+                var uniqueusers = users.users.GroupBy(p => p.employeeId).Select(g => g.First()).ToList();
+                var aoitoadd = users.users;
 
+                Console.WriteLine("--------Users to update " + users.users.GroupBy(p => p.employeeId).Select(g => g.First()).ToList().Count);
+               
                 if (users.users.Count > 0)
                 {
                     string baseUrl = ConfigurationManager.AppSettings[AppSettings.ApiUrlBase];
                     string fullApiUsers = baseUrl + "users";
+                    
+                    var quizesAssigned = users.users.Where(x => x.quizResultStatus == "Assigned").ToList();
+                    users.users = null;
+                    users.users = uniqueusers;
                     string jsonParameters = JsonConvert.SerializeObject(users);
 
                     Console.WriteLine("--------Sending users to Axonify");
                     GeneralResult resultCall = AxonifyApiClient.CallApi(fullApiUsers, HttpMethos.PUT, jsonParameters);
+                    foreach (var a in aoitoadd)
+                    {
+                        string fullApiAreasOfInterest = baseUrl + "users/" + a.employeeId + "/aois/" + a.areasOfInterest.Trim();
+                        resultCall = AxonifyApiClient.CallApi(fullApiAreasOfInterest, HttpMethos.PUT, string.Empty);
+                    }
+                 
 
                     if (!string.IsNullOrEmpty(resultCall.content) && resultCall.content.ToLower().Contains("\"status\""))
                     {
                         result = JsonConvert.DeserializeObject<GeneralResult>(resultCall.content);
                         result.content = resultCall.content;
                     }
-                    //https://<tenant>.axonify.com/axonify/api/v2/topics
-                    string createsubjectUrl = baseUrl + "subjects";
-                    SubjectRequest subjects = new SubjectRequest();
-                    TopicRequest topics = new TopicRequest();
-                    foreach (var u in users.users)
+                    //if there are quizzes assigned
+                    if(quizesAssigned.Count > 0)
                     {
-                        var sub = new Subject
+                        //https://<tenant>.axonify.com/axonify/api/v2/topics
+                        string createsubjectUrl = baseUrl + "subjects";
+                        SubjectRequest subjects = new SubjectRequest();
+                        TopicRequest topics = new TopicRequest();
+                        foreach (var u in quizesAssigned)
                         {
-                            categoryExternalId = "brand01",
-                            subjectExternalId = u.brandId,
-                            subjectName = u.brandName,
-                            revision = DateTime.Now.ToString()
-                        };
-                        subjects.subjects.Add(sub);
+                            //subject is a brand
+                            var sub = new Subject
+                            {
+                                categoryExternalId = "brand01",
+                                subjectExternalId = u.brandId,
+                                subjectName = u.brandName,
+                                revision = DateTime.Now.ToString()
+                            };
+                            subjects.subjects.Add(sub);
+                            //topic = quiz
+                            var top = new Topic
+                            {
+                                subjectExternalId = u.brandId,
+                                topicExternalId = u.quizId,
+                                topicName = u.areasOfInterest,
+                                revision = DateTime.Now.ToString()
+                            };
+                            topics.topics.Add(top);
+                        }
+                        jsonParameters = string.Empty;
+                        jsonParameters = JsonConvert.SerializeObject(subjects);
+                        resultCall = AxonifyApiClient.CallApi(createsubjectUrl, HttpMethos.PUT, jsonParameters);
 
-                        var top = new Topic
-                        {
-                            subjectExternalId = u.brandId,
-                            topicExternalId = u.quizId,
-                            topicName = u.areasOfInterest,
-                            revision = DateTime.Now.ToString()
-                        };
-                        topics.topics.Add(top);
+
+                        string createtopicUrl = baseUrl + "topics";
+                        jsonParameters = string.Empty;
+                        jsonParameters = JsonConvert.SerializeObject(topics);
+                        resultCall = AxonifyApiClient.CallApi(createtopicUrl, HttpMethos.PUT, jsonParameters);
                     }
-                    jsonParameters = string.Empty;
-                    jsonParameters = JsonConvert.SerializeObject(subjects);
-                    resultCall = AxonifyApiClient.CallApi(createsubjectUrl, HttpMethos.PUT, jsonParameters);
-
-
-                    string createtopicUrl = baseUrl + "topics";
-                    jsonParameters = string.Empty;
-                    jsonParameters = JsonConvert.SerializeObject(topics);
-                    resultCall = AxonifyApiClient.CallApi(createtopicUrl, HttpMethos.PUT, jsonParameters);
+                    
                     //Remove Areas Of Interest that are not included in BOS system for ACTIVE users
                     //Console.WriteLine("--------Removing from Axonify areas of interes that are not included of each user in BOS system");
                     //if (result.status.Equals(ApiStatusResponse.OK, StringComparison.OrdinalIgnoreCase) && users.users != null)
@@ -163,6 +182,12 @@ namespace AxonifyIntegration.Dal.ApiClient
                     }
                     ++page;
                 } while (topicGraduationsResult != null && topicGraduationsResult.hasMore);
+                foreach (var graduation in topicGraduations)
+                {
+                    //DateTime oDate = DateTime.ParseExact(graduation.graduationTimestamp, "YYYYMMDDTHH:mm±hh:mm", null);
+                    graduation.graduationTimestamp = graduation.graduationTimestamp.Remove(8,12);
+                    //graduation.graduationTimestamp = DateTime.Parse(graduation.graduationTimestamp).ToString();
+                }
 
                 if (topicGraduations.Count > 0)
                 {

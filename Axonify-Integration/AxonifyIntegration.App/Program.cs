@@ -20,16 +20,16 @@ namespace AxonifyIntegration.App
             if(args != null)
             {
                 UsersApiClient usersApiClient = new UsersApiClient();
-                usersApiClient.SendPendingUsers();
-                //switch (args[0].ToString())
-                //{
-                //    case "AxonifyUsers":
-                //        usersApiClient.SendPendingUsers();
-                //        break;
-                //    case "TopicGraduations":
-                //        usersApiClient.GetTopicGraduations();
-                //        break;
-                //}                
+                //usersApiClient.GetTopicGraduations();
+                switch (args[0].ToString())
+                {
+                    case "AxonifyUsers":
+                        usersApiClient.SendPendingUsers();
+                        break;
+                    case "TopicGraduations":
+                        usersApiClient.GetTopicGraduations();
+                        break;
+                }
             }
         }
     }
