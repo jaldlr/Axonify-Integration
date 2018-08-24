@@ -29,7 +29,6 @@ namespace AxonifyIntegration.Models.Api
         public string brandId { get; set; }
         public string brandName { get; set; }
         public string quizResultStatus { get; set; }
-        public string quizstatus { get; set; }
         public string[] areasOfInterests { set; get; }
         public Boolean suspended { set; get; }
         public DateTime quizassigned { set; get; }

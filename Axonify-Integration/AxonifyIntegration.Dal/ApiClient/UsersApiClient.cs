@@ -44,8 +44,8 @@ namespace AxonifyIntegration.Dal.ApiClient
                 {
                     string baseUrl = ConfigurationManager.AppSettings[AppSettings.ApiUrlBase];
                     string fullApiUsers = baseUrl + "users";
-                    var monthbefore = DateTime.Now.AddMonths(-1);
-                    var quizesAssigned = users.users.Where(x => x.quizassigned >= monthbefore).ToList();
+                    
+                    var quizesAssigned = users.users.Where(x => x.quizResultStatus == "Assigned").ToList();
                     users.users = null;
                     users.users = uniqueusers;
                     string jsonParameters = JsonConvert.SerializeObject(users);
@@ -159,7 +159,7 @@ namespace AxonifyIntegration.Dal.ApiClient
 
             try
             {
-                string timePeriod = "WEEK";
+                string timePeriod = "DAY";
                 string timePeriodDate = DateTime.Now.ToString("yyyyMMdd");
                 string baseUrl = ConfigurationManager.AppSettings[AppSettings.ApiUrlBase];
                 string fullApiUsers = baseUrl + "users/topicGraduations?timePeriod=" + timePeriod + "&timePeriodDate=" + timePeriodDate + "&page=";

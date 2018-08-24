@@ -20,7 +20,7 @@ namespace AxonifyIntegration.App
             if(args != null)
             {
                 UsersApiClient usersApiClient = new UsersApiClient();
-                //usersApiClient.SendPendingUsers();
+                //usersApiClient.GetTopicGraduations();
                 switch (args[0].ToString())
                 {
                     case "AxonifyUsers":
