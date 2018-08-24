@@ -53,6 +53,8 @@ namespace AxonifyIntegration.Dal.ApiClient
                     }
 
                     //Remove Areas Of Interest that are not included in BOS system for ACTIVE users
+                    //JLUNA: August 23 2018: This block of code is not necessary because Axonify automatically remove the areas of interes that were not included inside "areasOfInterest" parameter of the API that was called before this
+                    /*
                     Console.WriteLine("--------Removing from Axonify areas of interes that does not are included of each user in BOS system");
                     if (result.status.Equals(ApiStatusResponse.OK, StringComparison.OrdinalIgnoreCase) && users.users != null)
                     {
@@ -77,6 +79,7 @@ namespace AxonifyIntegration.Dal.ApiClient
                             }
                         }
                     }
+                    */
 
                     result.statusCode = resultCall.statusCode;
                     result.statusDescription = resultCall.statusDescription;
