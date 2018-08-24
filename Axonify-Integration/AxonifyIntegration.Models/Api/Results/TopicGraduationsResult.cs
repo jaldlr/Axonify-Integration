@@ -12,7 +12,7 @@ namespace AxonifyIntegration.Models.Api.Results
         public string timePeriodDate { set; get; }
         public bool hasMore { set; get; }
         public List<TopicGraduation> topicGraduations { set; get; }
-        
+
         public TopicGraduationsResult()
         {
             this.topicGraduations = new List<TopicGraduation>();

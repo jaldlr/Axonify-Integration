@@ -40,13 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Api\Requests\TopicRequest.cs" />
-    <Compile Include="Api\Requests\SubjectRequest.cs" />
     <Compile Include="Api\Requests\UsersRequest.cs" />
     <Compile Include="Api\Results\GeneralResult.cs" />
     <Compile Include="Api\Results\TopicGraduationsResult.cs" />
-    <Compile Include="Api\Subject.cs" />
-    <Compile Include="Api\Topic.cs" />
     <Compile Include="Api\TopicDetail.cs" />
     <Compile Include="Api\TopicGraduation.cs" />
     <Compile Include="Api\UserAreasOfInterest.cs" />

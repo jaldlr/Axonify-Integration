@@ -79,7 +79,7 @@ namespace AxonifyIntegration.Dal.AdoDB
 
         // Creates a SqlConnection using the current connection string
         public void Connect()
-        {            
+        {
             _conn = new SqlConnection(_connString);
             _conn.Open();
         }
@@ -298,7 +298,7 @@ namespace AxonifyIntegration.Dal.AdoDB
                     return ds;
                 }
             }
-            catch(System.Exception ex)
+            catch (System.Exception ex)
             {
                 throw ex;
             }

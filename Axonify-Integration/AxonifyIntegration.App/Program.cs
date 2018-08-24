@@ -17,10 +17,9 @@ namespace AxonifyIntegration.App
     {
         static void Main(string[] args)
         {
-            if(args != null)
+            if (args != null)
             {
                 UsersApiClient usersApiClient = new UsersApiClient();
-                //usersApiClient.GetTopicGraduations();
                 switch (args[0].ToString())
                 {
                     case "AxonifyUsers":

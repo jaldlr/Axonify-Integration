@@ -28,13 +28,13 @@ namespace AxonifyIntegration.Dal.Repositories
         {
             List<UsersMod> users = new List<UsersMod>();
 
-            using(AdoHelper db = new AdoHelper(this._connectionString))
+            using (AdoHelper db = new AdoHelper(this._connectionString))
             {
                 db.Connect();
 
                 DataSet ds = db.ExecDataSetProc("axf_usp_InterfaceGetPendingUsers");
 
-                if(ds.Tables.Count > 0)
+                if (ds.Tables.Count > 0)
                 {
                     users = ds.Tables[0].ToList<UsersMod>();
                     foreach (var user in users)
@@ -46,18 +46,18 @@ namespace AxonifyIntegration.Dal.Repositories
                     }
                 }
 
-                //no needed anymore
-                //if (ds.Tables.Count > 0)
-                //{
-                //    List<UserAreasOfInterest> areas = ds.Tables[1].ToList<UserAreasOfInterest>();
-                //    foreach(UsersMod user in users)
-                //    {
-                //        user.areasOfInterest = (
-                //            from a in areas where a.employeeId == user.employeeId
-                //            select a.areaOfInterest
-                //        ).ToArray();
-                //    }
-                //}
+                if (ds.Tables.Count > 0)
+                {
+                    List<UserAreasOfInterest> areas = ds.Tables[1].ToList<UserAreasOfInterest>();
+                    foreach (UsersMod user in users)
+                    {
+                        user.areasOfInterest = (
+                            from a in areas
+                            where a.employeeId == user.employeeId
+                            select a.areaOfInterest
+                        ).ToArray();
+                    }
+                }
 
                 db.Dispose();
             }
