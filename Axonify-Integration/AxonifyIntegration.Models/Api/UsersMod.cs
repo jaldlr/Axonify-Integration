@@ -26,10 +26,12 @@ namespace AxonifyIntegration.Models.Api
         public string[] areasOfInterest { set; get; }
         public string[] areasOfInterests { set; get; }
         public Boolean suspended { set; get; }
+        public Boolean updated { set; get; }
 
         public UsersMod()
         {
             this.areasOfInterest = new string[] { };
+            this.updated = false;
         }
     }
 }
