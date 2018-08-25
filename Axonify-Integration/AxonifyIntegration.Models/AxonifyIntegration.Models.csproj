@@ -42,8 +42,10 @@
   <ItemGroup>
     <Compile Include="Api\Requests\UsersRequest.cs" />
     <Compile Include="Api\Results\GeneralResult.cs" />
+    <Compile Include="Api\Results\IntroductoryCompletionsResult.cs" />
     <Compile Include="Api\Results\TopicGraduationsResult.cs" />
     <Compile Include="Api\TopicDetail.cs" />
+    <Compile Include="Api\IntroductoryCompletion.cs" />
     <Compile Include="Api\TopicGraduation.cs" />
     <Compile Include="Api\UserAreasOfInterest.cs" />
     <Compile Include="Api\UsersMod.cs" />

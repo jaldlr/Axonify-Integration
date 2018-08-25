@@ -40,7 +40,7 @@ namespace AxonifyIntegration.Dal.ApiClient
                 if (users.users.Count > 0)
                 {
                     string baseUrl = ConfigurationManager.AppSettings[AppSettings.ApiUrlBase];
-                    string fullApiUsers = baseUrl + "users";
+                    string fullApiUrl = baseUrl + "users";
 
                     int perPage = 100;
                     List<UsersMod> paginatedUsers = (from u in users.users select u).Take(perPage).ToList();
@@ -54,7 +54,7 @@ namespace AxonifyIntegration.Dal.ApiClient
                         string jsonParameters = JsonConvert.SerializeObject(usersToSend);
 
                         Console.WriteLine("--------Sending users to Axonify");
-                        GeneralResult resultCall = AxonifyApiClient.CallApi(fullApiUsers, HttpMethos.PUT, jsonParameters);
+                        GeneralResult resultCall = AxonifyApiClient.CallApi(fullApiUrl, HttpMethos.PUT, jsonParameters);
 
                         if (!string.IsNullOrEmpty(resultCall.content) && resultCall.content.ToLower().Contains("\"status\""))
                         {
@@ -134,13 +134,13 @@ namespace AxonifyIntegration.Dal.ApiClient
                 string timePeriod = "DAY";
                 string timePeriodDate = DateTime.Now.ToString("yyyyMMdd");
                 string baseUrl = ConfigurationManager.AppSettings[AppSettings.ApiUrlBase];
-                string fullApiUsers = baseUrl + "users/topicGraduations?timePeriod=" + timePeriod + "&timePeriodDate=" + timePeriodDate + "&page=";
-                int page = 0;
+                string fullApiUrl = baseUrl + "users/topicGraduations?timePeriod=" + timePeriod + "&timePeriodDate=" + timePeriodDate + "&page=";
+                int page = 1;
 
                 do
                 {
                     Console.WriteLine("--------Getting topics graduations for [timePeriod = " + timePeriod + "; timePeriodDate = " + timePeriodDate + "; page = " + page.ToString() + ";]");
-                    GeneralResult resultCall = AxonifyApiClient.CallApi(fullApiUsers + page.ToString(), HttpMethos.GET, string.Empty);
+                    GeneralResult resultCall = AxonifyApiClient.CallApi(fullApiUrl + page.ToString(), HttpMethos.GET, string.Empty);
                     topicGraduationsResult = new TopicGraduationsResult();
 
                     Console.WriteLine("-------------HttpStatusCode = " + resultCall.statusCode.ToString());
@@ -164,7 +164,7 @@ namespace AxonifyIntegration.Dal.ApiClient
                 }
                 else
                 {
-                    Console.WriteLine("--------No topic graduations to be updated");
+                    Console.WriteLine("--------No topic graduations were found in axonify");
                 }
 
                 InterfacesRepository.InterfaceHistoryUpdate(InterfacesActions.SUCCESSPROCESS, InterfacesNames.TopicGraduations);
@@ -179,6 +179,127 @@ namespace AxonifyIntegration.Dal.ApiClient
 
 
             Console.WriteLine("----End Interface: " + InterfacesNames.TopicGraduations);
+        }
+
+        /// <summary>
+        /// Call an Axonify api to get all introductory completions from current date, and register them into BOS system
+        /// </summary>
+        public void GetIntroductoryCompletions()
+        {
+            InterfacesRepository.InterfaceHistoryUpdate(InterfacesActions.NEWRECORD, InterfacesNames.IntroductoryCompletions);
+            Console.WriteLine("----Execution Interface: " + InterfacesNames.IntroductoryCompletions);
+            IntroductoryCompletionsResult introductoryCompletionsResult = new IntroductoryCompletionsResult();
+            List<IntroductoryCompletion> introductoryCompletions = new List<IntroductoryCompletion>();
+
+            try
+            {
+                string timePeriod = "MONTH";
+                string timePeriodDate = DateTime.Now.ToString("yyyyMMdd");
+                string baseUrl = ConfigurationManager.AppSettings[AppSettings.ApiUrlBase];
+                string fullApiUrl = baseUrl + "users/introductoryCompletions?timePeriod=" + timePeriod + "&timePeriodDate=" + timePeriodDate + "&page=";
+                int page = 1;
+
+                do
+                {
+                    Console.WriteLine("--------Getting introductory completions for [timePeriod = " + timePeriod + "; timePeriodDate = " + timePeriodDate + "; page = " + page.ToString() + ";]");
+                    GeneralResult resultCall = AxonifyApiClient.CallApi(fullApiUrl + page.ToString(), HttpMethos.GET, string.Empty);
+                    introductoryCompletionsResult = new IntroductoryCompletionsResult();
+
+                    Console.WriteLine("-------------HttpStatusCode = " + resultCall.statusCode.ToString());
+                    if (resultCall.statusCode == HttpStatusCode.OK)
+                    {
+                        introductoryCompletionsResult = JsonConvert.DeserializeObject<IntroductoryCompletionsResult>(resultCall.content);
+                        introductoryCompletions.AddRange(introductoryCompletionsResult.introductoryCompletions);
+                    }
+                    else
+                    {
+                        introductoryCompletionsResult.hasMore = false;
+                    }
+                    ++page;
+                } while (introductoryCompletionsResult != null && introductoryCompletionsResult.hasMore);
+
+
+                //<JLUNA SIMULATION>
+
+                introductoryCompletions.Add(new IntroductoryCompletion()
+                {
+                    employeeId = "107",
+                    completionTimestamp = "20180824T20:11-05:00",
+                    assessmentScore = 11,
+                    timeSpent = 51,
+                    topicDetails = new TopicDetail()
+                    {
+                        categoryName = "categoryName1",
+                        categoryExternalId = "categoryExternalId1",
+                        subjectName = "subjectName1",
+                        subjectExternalId = "subjectExternalId1",
+                        topicName = "topicName1",
+                        topicExternalId = "583",
+                        level = 21
+                    }
+                });
+
+                introductoryCompletions.Add(new IntroductoryCompletion()
+                {
+                    employeeId = "107",
+                    completionTimestamp = "20180824T20:12-05:00",
+                    assessmentScore = 12,
+                    timeSpent = 52,
+                    topicDetails = new TopicDetail()
+                    {
+                        categoryName = "categoryName2",
+                        categoryExternalId = "categoryExternalId2",
+                        subjectName = "subjectName2",
+                        subjectExternalId = "subjectExternalId2",
+                        topicName = "topicName2",
+                        topicExternalId = "9",
+                        level = 22
+                    }
+                });
+
+                introductoryCompletions.Add(new IntroductoryCompletion()
+                {
+                    employeeId = "107",
+                    completionTimestamp = "20180824T20:13-05:00",
+                    assessmentScore = 13,
+                    timeSpent = 53,
+                    topicDetails = new TopicDetail()
+                    {
+                        categoryName = "categoryName3",
+                        categoryExternalId = "categoryExternalId3",
+                        subjectName = "subjectName3",
+                        subjectExternalId = "subjectExternalId3",
+                        topicName = "topicName3",
+                        topicExternalId = "8",
+                        level = 23
+                    }
+                });
+
+                //</JLUNA SIMULATION>
+
+                if (introductoryCompletions.Count > 0)
+                {
+                    Console.WriteLine("--------Updating in BOS system introductory completions for " + introductoryCompletions.Count.ToString() + " users");
+                    UsersRepository repository = new UsersRepository();
+                    repository.UpdateIntroductoryCompletions(introductoryCompletions);
+                }
+                else
+                {
+                    Console.WriteLine("--------No introductory completions wer found in axonify");
+                }
+
+                InterfacesRepository.InterfaceHistoryUpdate(InterfacesActions.SUCCESSPROCESS, InterfacesNames.IntroductoryCompletions);
+                Console.WriteLine("--------SUCCESS Process");
+            }
+            catch (Exception ex)
+            {
+                InterfacesRepository.InterfaceHistoryUpdate(InterfacesActions.FAILPROCESS, InterfacesNames.IntroductoryCompletions, ex.Message);
+                Console.WriteLine("--------FAIL Process");
+                Console.WriteLine("--------Error: " + ex.Message);
+            }
+
+
+            Console.WriteLine("----End Interface: " + InterfacesNames.IntroductoryCompletions);
         }
     }
 }

@@ -28,6 +28,9 @@ namespace AxonifyIntegration.App
                     case "TopicGraduations":
                         usersApiClient.GetTopicGraduations();
                         break;
+                    case "IntroductoryCompletions":
+                        usersApiClient.GetIntroductoryCompletions();
+                        break;
                 }
             }
         }

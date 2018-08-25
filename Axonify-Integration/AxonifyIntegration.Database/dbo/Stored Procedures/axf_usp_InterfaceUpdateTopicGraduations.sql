@@ -82,15 +82,21 @@ BEGIN
 		OPTION (OPTIMIZE FOR ( @TopicGraduationsXML = NULL ))
 		
 		MERGE INTO [winstontraining].[dbo].[QUIZRESULT] WITH (HOLDLOCK) AS quizresult
-		USING @TblTopicGraduations AS axonifytopic
-		ON quizresult.MCID = axonifytopic.employeeId AND quizresult.questionsetid = axonifytopic.topicExternalId
+		USING (
+			SELECT axonify.*
+			FROM @TblTopicGraduations axonify
+			JOIN [winstontraining].[dbo].[QUESTIONSET] q
+				ON axonify.topicExternalId = q.questionsetid
+		) AS axonifySource
+			ON quizresult.MCID = axonifySource.employeeId AND quizresult.questionsetid = axonifySource.topicExternalId
 		WHEN MATCHED THEN --update
 		UPDATE SET 
-		 quizresult.status = (case when axonifytopic.graduationTimestamp is NULL then 'Assigned' else 'Completed' end),
-		 quizresult.grade = (case when axonifytopic.graduationTimestamp is NULL then 'Pass' else 'Pass' end),
-		 quizresult.datetaken = axonifytopic.graduationTimestamp 
-		WHEN NOT MATCHED BY TARGET THEN --insert
-		INSERT VALUES((select top 1 questionsetid from  [winstontraining].[dbo].[QUESTIONSET] where questionsetid = axonifytopic.topicExternalId),getdate(),axonifytopic.graduationTimestamp,'Assigned',NULL,NULL,NULL,NULL,0,NULL,NULL,getdate(),(getdate() + 5),axonifytopic.employeeid,NULL);
+			quizresult.status = (case when axonifySource.graduationTimestamp IS NULL then 'Assigned' else 'Completed' end),
+			quizresult.grade = (case when axonifySource.graduationTimestamp IS NULL then 'Pass' else 'Pass' end),
+			quizresult.datetaken = [dbo].[axf_udf_ConvertDatISO8601ToDateTime](axonifySource.graduationTimestamp) 
+		WHEN NOT MATCHED THEN  
+		INSERT ([QuestionSetID],[DateAssigned],[DateTaken],[Status],[Grade],[Attempts],[DateReviewed],[ReviewedBy],[Closed],[ProjectSegmentID],[ProjectEventAssignmentID],[ExecutionDateMin],[ExecutionDateMax],[MCID],[EmailedOn])  
+		VALUES(axonifySource.topicExternalId,getdate(),[dbo].[axf_udf_ConvertDatISO8601ToDateTime](axonifySource.graduationTimestamp),'Assigned',NULL,NULL,NULL,NULL,0,NULL,NULL,getdate(),(getdate() + 5),axonifySource.employeeid,NULL);
 
 		
 		--MERGE INTO [winstontraining].[dbo].[QUIZRESULT] WITH (HOLDLOCK) AS quizresult
@@ -104,4 +110,4 @@ BEGIN
 		--WHEN NOT MATCHED BY TARGET THEN --insert
 		--INSERT VALUES(8,getdate(),axonifytopic.graduationTimestamp,'Assigned',NULL,NULL,NULL,NULL,0,NULL,NULL,getdate(),(getdate() + 5),axonifytopic.employeeid,NULL);
 	END
-END
+END 

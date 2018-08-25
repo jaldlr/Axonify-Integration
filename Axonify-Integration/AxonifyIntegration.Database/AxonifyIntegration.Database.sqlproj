@@ -61,6 +61,7 @@
     <Folder Include="dbo\Tables\" />
     <Folder Include="dbo\Stored Procedures\" />
     <Folder Include="Scripts\" />
+    <Folder Include="dbo\Functions" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\axf_Interfaces.sql" />
@@ -69,6 +70,8 @@
     <None Include="Scripts\ScriptsIgnoredOnImport.sql" />
     <Build Include="dbo\Stored Procedures\axf_usp_InterfaceGetPendingUsers.sql" />
     <Build Include="dbo\Stored Procedures\axf_usp_InterfaceUpdateTopicGraduations.sql" />
+    <Build Include="dbo\Functions\axf_udf_ConvertDatISO8601ToDateTime.sql" />
+    <Build Include="dbo\Stored Procedures\axf_usp_InterfaceUpdateIntroductoryCompletions.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="AxonifyIntegration.Staging.publish.xml" />

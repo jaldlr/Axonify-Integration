@@ -70,14 +70,30 @@ namespace AxonifyIntegration.Dal.Repositories
         /// </summary>
         public void UpdateTopicGraduations(List<TopicGraduation> topics)
         {
-            List<UsersMod> users = new List<UsersMod>();
-
             using (AdoHelper db = new AdoHelper(this._connectionString))
             {
                 db.Connect();
 
                 DataSet ds = db.ExecDataSetProc("axf_usp_InterfaceUpdateTopicGraduations",
                     "@TopicGraduationsXML", StringHelper.ObjectToXML(topics)
+                );
+
+                db.Dispose();
+            }
+        }
+
+        /// <summary>
+        /// Update all introductory completions obtained by axonify into BOS system
+        /// </summary>
+        public void UpdateIntroductoryCompletions(List<IntroductoryCompletion> introductoryCompletions)
+        {
+            using (AdoHelper db = new AdoHelper(this._connectionString))
+            {
+                string xml = StringHelper.ObjectToXML(introductoryCompletions);
+                db.Connect();
+
+                DataSet ds = db.ExecDataSetProc("axf_usp_InterfaceUpdateIntroductoryCompletions",
+                    "@IntroductoryCompletionsXML", StringHelper.ObjectToXML(introductoryCompletions)
                 );
 
                 db.Dispose();
