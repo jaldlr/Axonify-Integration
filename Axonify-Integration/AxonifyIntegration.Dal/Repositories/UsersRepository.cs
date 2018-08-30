@@ -89,7 +89,6 @@ namespace AxonifyIntegration.Dal.Repositories
         {
             using (AdoHelper db = new AdoHelper(this._connectionString))
             {
-                string xml = StringHelper.ObjectToXML(introductoryCompletions);
                 db.Connect();
 
                 DataSet ds = db.ExecDataSetProc("axf_usp_InterfaceUpdateIntroductoryCompletions",

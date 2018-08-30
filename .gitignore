@@ -244,3 +244,4 @@ ModelManifest.xml
 # FAKE - F# Make
 .fake/
 /AxonifyIntegration/AxonifyIntegration.Database/AxonifyIntegration.Database.jfm
+/Axonify-Integration/AxonifyIntegration.Database/AxonifyIntegration.Database.jfm
