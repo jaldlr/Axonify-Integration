@@ -63,7 +63,7 @@ BEGIN
 	join [connect].[dbo].[vBOSUSER] bos on bos.mcid = t.talentid	
 	join wrsbos.dbo.vtalent vt on vt.talentid=t.talentid
 	where (@LasModifiedDate is null or t.modifieddate >= @LasModifiedDate)
-	or t.talentid = 107
+	--or t.talentid = 107
 
 	--area of intereset now are the classes talents take
 	----Table1: Areas Of Interest
@@ -84,5 +84,5 @@ BEGIN
 	join [wrsbos].dbo.talent t
 		on b.talentid = t.talentid and b.IsBrandActive = 1 and b.IsActive = 1
 	where (@LasModifiedDate is null or t.modifieddate >= @LasModifiedDate)
-	or t.talentid = 107
+	--or t.talentid = 107
 END

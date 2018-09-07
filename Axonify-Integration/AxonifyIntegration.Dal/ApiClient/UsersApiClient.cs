@@ -35,17 +35,21 @@ namespace AxonifyIntegration.Dal.ApiClient
                 {
                     users = repoUsers.GetPendingUserToSendToAxonify()
                 };
-                Console.WriteLine("--------Users to update " + users.users.Count);
 
                 if (users.users.Count > 0)
                 {
                     string baseUrl = ConfigurationManager.AppSettings[AppSettings.ApiUrlBase];
                     string fullApiUrl = baseUrl + "users";
 
-                    int perPage = 100;
+                    int perPage = 50;
+                    int currentPage = 0;
                     List<UsersMod> paginatedUsers = (from u in users.users select u).Take(perPage).ToList();
-                    while(paginatedUsers != null && paginatedUsers.Count > 0)
+                    Console.WriteLine("--------Users to update " + users.users.Count + "; Total Pages = " + Math.Ceiling((double)users.users.Count / (double)perPage));
+
+                    while (paginatedUsers != null && paginatedUsers.Count > 0)
                     {
+                        ++currentPage;
+
                         UsersRequest usersToSend = new UsersRequest()
                         {
                             users = paginatedUsers
@@ -53,7 +57,7 @@ namespace AxonifyIntegration.Dal.ApiClient
 
                         string jsonParameters = JsonConvert.SerializeObject(usersToSend);
 
-                        Console.WriteLine("--------Sending users to Axonify");
+                        Console.WriteLine("--------Sending users to Axonify of page number " + currentPage);
                         GeneralResult resultCall = AxonifyApiClient.CallApi(fullApiUrl, HttpMethos.PUT, jsonParameters);
 
                         if (!string.IsNullOrEmpty(resultCall.content) && resultCall.content.ToLower().Contains("\"status\""))
