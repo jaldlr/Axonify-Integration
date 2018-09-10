@@ -28,7 +28,7 @@ BEGIN
 		--	from [connect].dbo.vwuserrole 
 		--	where u.userid = ur.userid
 		--),--for now just the top 1 until we get an answer
-		userType = 'Admin',
+		userType = 'User',
 		email = m.email,
 		--[language] = upper(
 		--	case
